@@ -1,464 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Open Source Student — CivicOS Labs</title>
-  <meta name="description" content="From AI consumer to AI builder. 216 pages. Install, run, and build with local AI on your own computer. 100% of proceeds fund the founding of CivicOS Institute.">
-  <meta property="og:title" content="The Open Source Student — Founders Complete Edition">
-  <meta property="og:description" content="Stop renting AI. Start building it. A complete guide to installing, running, and building with local AI.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.civicoslabs.com/ebook/">
-  <meta property="og:image" content="https://www.civicoslabs.com/og-ebook.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="The Open Source Student — CivicOS Labs">
-  <meta name="twitter:description" content="From AI consumer to AI builder. 216-page guide to local AI.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0%25' stop-color='%23d4a843'/%3E%3Cstop offset='100%25' stop-color='%23b8912e'/%3E%3C/defs%3E%3Cpath d='M32 4L8 16v16c0 14.4 10.4 27.8 24 32 13.6-4.2 24-17.6 24-32V16L32 4z' fill='%231a2744' stroke='%23d4a843' stroke-width='2'/%3E%3Cellipse cx='32' cy='28' rx='10' ry='10' fill='none' stroke='url(%23g)' stroke-width='2.5'/%3E%3Ccircle cx='32' cy='28' r='4' fill='%23d4a843'/%3E%3Cpath d='M22 28a10 10 0 0 1 20 0' fill='none' stroke='%23d4a843' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E">
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root {
-      --navy: #1a2744;
-      --navy-mid: #1b2d4a;
-      --navy-light: #243352;
-      --navy-800: #0f1a2e;
-      --gold: #d4a843;
-      --gold-light: #e8c96a;
-      --gold-dim: rgba(212,168,67,0.10);
-      --white: #ffffff;
-      --gray-50: #f8f9fb;
-      --gray-100: #eef0f4;
-      --gray-200: #d4d8e0;
-      --gray-300: #bcc2ce;
-      --gray-400: #8a93a6;
-      --gray-600: #4a5568;
-      --mono: 'IBM Plex Mono', 'SF Mono', 'Fira Code', monospace;
-      --border: rgba(212,168,67,0.15);
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      color: var(--gray-600);
-      background: var(--white);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--gold); text-decoration: none; }
-    a:hover { color: var(--gold-light); }
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
-
-    /* ── Nav ── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.5rem 2rem;
-      background: var(--navy);
-      color: var(--white);
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--white);
-    }
-    .nav-logo svg { width: 36px; height: 36px; }
-    .nav-logo span { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--white); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-
-    /* ── Ebook Hero ── */
-    .ebook-hero {
-      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-800) 100%);
-      color: var(--white);
-      padding: 6rem 2rem;
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 4rem;
-      max-width: 1120px;
-      margin: 0 auto;
-      align-items: center;
-    }
-    .ebook-crumb { font-size: 0.8rem; color: var(--gray-400); margin-bottom: 1rem; font-family: var(--mono); }
-    .ebook-crumb a { color: var(--gray-400); }
-    .ebook-crumb a:hover { color: var(--gold); }
-    .ebook-crumb span { margin: 0 0.5rem; }
-    .ebook-series { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-    .ebook-hero h1 { font-size: 3rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-    .ebook-hero h1 em { color: var(--gold); font-style: normal; }
-    .ebook-edition { font-size: 1rem; color: var(--gold-light); font-weight: 500; margin-bottom: 1rem; }
-    .ebook-badge {
-      display: inline-block;
-      padding: 0.4rem 1rem;
-      border: 1px solid rgba(212,168,67,0.4);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .ebook-tagline { font-size: 1.1rem; line-height: 1.7; color: rgba(255,255,255,0.8); margin-bottom: 2rem; }
-
-    /* ── Cover ── */
-    .book-cover {
-      width: 100%;
-      aspect-ratio: 3/4;
-      background: linear-gradient(160deg, #0f1a2e 0%, #1a2744 100%);
-      border: 1px solid rgba(212,168,67,0.3);
-      border-radius: 6px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-    }
-    .book-cover::before {
-      content: '';
-      position: absolute;
-      top: -30%;
-      right: -20%;
-      width: 70%;
-      height: 120%;
-      background: radial-gradient(ellipse, rgba(212,168,67,0.05) 0%, transparent 70%);
-    }
-    .cover-institute { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 2rem; }
-    .cover-title { font-size: 1.5rem; font-weight: 700; line-height: 1.2; color: var(--white); }
-    .cover-title em { color: var(--gold); font-style: normal; }
-    .cover-subtitle { font-size: 0.85rem; color: var(--gray-400); margin-top: 0.5rem; }
-    .cover-geo { font-size: 3rem; color: rgba(212,168,67,0.08); text-align: center; flex: 1; display: flex; align-items: center; justify-content: center; }
-    .cover-bottom { border-top: 1px solid rgba(212,168,67,0.15); padding-top: 1rem; }
-    .cover-edition { font-size: 0.8rem; color: var(--gold); font-weight: 500; }
-    .cover-pages { font-size: 0.75rem; color: var(--gray-400); margin-top: 0.25rem; }
-
-    /* ── Sections ── */
-    .sec { padding: 4rem 2rem; max-width: 1120px; margin: 0 auto; }
-    .sec-dark { background: var(--navy-mid); color: var(--white); max-width: 100%; }
-    .sec-dark .container { max-width: 1120px; margin: 0 auto; padding: 4rem 2rem; }
-    .section-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    /* ── Pricing grid ── */
-    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
-    .pricing-left h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2; }
-    .pricing-left p { font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
-    .pricing-strip { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-    .pricing-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(212,168,67,0.12);
-      border-radius: 8px;
-      padding: 1.5rem;
-      min-width: 200px;
-      flex: 1;
-    }
-    .pricing-card .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-400); margin-bottom: 0.25rem; }
-    .pricing-card .value { font-size: 1.5rem; font-weight: 700; color: var(--gold); }
-    .pricing-card .note { font-size: 0.8rem; color: var(--gray-400); margin-top: 0.25rem; }
-    .pricing-right { text-align: center; }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--gold); color: var(--navy); font-weight: 600;
-      padding: 0.85rem 2rem; border-radius: 6px; font-size: 1rem;
-      border: none; cursor: pointer; text-decoration: none; transition: all 0.2s;
-    }
-    .btn-primary:hover { background: var(--gold-light); color: var(--navy); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: transparent; color: var(--gold); font-weight: 500;
-      padding: 0.85rem 2rem; border-radius: 6px; font-size: 1rem;
-      border: 1px solid var(--gold); cursor: pointer; text-decoration: none; transition: all 0.2s;
-    }
-    .btn-outline:hover { background: rgba(212,168,67,0.08); }
-    .btn-large { padding: 1rem 2.5rem; font-size: 1.1rem; }
-
-    .price-tag { margin-bottom: 1.5rem; }
-    .price-tag .num { font-size: 3rem; font-weight: 800; color: var(--gold); line-height: 1; }
-    .price-tag .sub { font-size: 0.85rem; color: var(--gray-400); margin-top: 0.25rem; }
-
-    /* ── What's Inside ── */
-    .inside-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
-    .inside-card {
-      background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 8px;
-      padding: 1.5rem; transition: border-color 0.2s;
-    }
-    .inside-card:hover { border-color: var(--gold); }
-    .inside-card .icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
-    .inside-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--navy); }
-    .inside-card p { font-size: 0.85rem; color: var(--gray-400); line-height: 1.6; }
-
-    /* ── TOC ── */
-    .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .toc-item {
-      display: flex; gap: 0.75rem;
-      padding: 0.75rem; border-radius: 6px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(212,168,67,0.08);
-      transition: border-color 0.2s;
-    }
-    .toc-item:hover { border-color: rgba(212,168,67,0.3); }
-    .toc-num { font-size: 0.7rem; font-family: var(--mono); color: var(--gold); min-width: 4rem; padding-top: 0.1rem; }
-    .toc-title { font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.4; }
-
-    /* ── FAQ ── */
-    .faq-grid { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
-    .faq-item {
-      background: var(--gray-50);
-      border: 1px solid var(--gray-100);
-      border-radius: 8px;
-      padding: 1.25rem 1.5rem;
-    }
-    .faq-item h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.5rem; }
-    .faq-item p { font-size: 0.9rem; color: var(--gray-600); line-height: 1.6; }
-
-    /* ── Mission strip ── */
-    .mission-strip {
-      background: var(--navy);
-      color: var(--white);
-      text-align: center;
-      padding: 3rem 2rem;
-    }
-    .mission-strip h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; }
-    .mission-strip h2 em { color: var(--gold); font-style: normal; }
-    .mission-strip p { font-size: 0.95rem; color: rgba(255,255,255,0.7); max-width: 640px; margin: 0 auto 1.5rem; }
-
-    /* ── Footer ── */
-    footer {
-      background: var(--navy-800);
-      color: var(--gray-400);
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.85rem;
-    }
-    footer a { color: var(--gray-400); }
-    footer a:hover { color: var(--gold); }
-
-    /* ── Stats ── */
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .hstat { text-align: center; }
-    .hstat-num { font-size: 1.5rem; font-weight: 700; color: var(--gold); }
-    .hstat-label { font-size: 0.7rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.15rem; }
-
-    @media (max-width: 768px) {
-      .ebook-hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2rem; }
-      .ebook-hero h1 { font-size: 2rem; }
-      .pricing-grid { grid-template-columns: 1fr; }
-      .inside-grid { grid-template-columns: 1fr; }
-      .toc-grid { grid-template-columns: 1fr; }
-      .hero-stats { grid-template-columns: repeat(2, 1fr); }
-      nav { flex-direction: column; gap: 1rem; }
-      .nav-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Open Source Student — From AI consumer to AI builder. 216 pages. $9.99.">
+    <title>The Open Source Student — CivicOS Labs</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<nav>
-  <a class="nav-logo" href="https://civicoslabs.com/">
-    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d4a843"/><stop offset="100%" stop-color="#b8912e"/></linearGradient></defs>
-      <path d="M32 4L8 16v16c0 14.4 10.4 27.8 24 32 13.6-4.2 24-17.6 24-32V16L32 4z" fill="#1a2744" stroke="#d4a843" stroke-width="2"/>
-      <ellipse cx="32" cy="28" rx="10" ry="10" fill="none" stroke="url(#g)" stroke-width="2.5"/>
-      <circle cx="32" cy="28" r="4" fill="#d4a843"/>
-      <path d="M22 28a10 10 0 0 1 20 0" fill="none" stroke="#d4a843" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    <span>CivicOS Labs</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="https://civicoslabs.com/">Home</a></li>
-    <li><a href="https://civicos-institute.org/">CivicOS Institute ↗</a></li>
-    <li><a href="https://www.amazon.com/dp/B0GQ5JM6LT" target="_blank" rel="noopener">Buy on Amazon →</a></li>
-  </ul>
-</nav>
-
-<section class="ebook-hero">
-  <div>
-    <div class="ebook-crumb"><a href="https://civicoslabs.com/">Labs</a> <span>/</span> Ebook</div>
-    <div class="ebook-series">— THE OPEN SOURCE STUDENT SERIES</div>
-    <h1>The Open Source <em>Student</em></h1>
-    <div class="ebook-edition">Founders Complete Edition</div>
-    <div class="ebook-badge">Now Available — $9.99</div>
-    <p class="ebook-tagline">
-      Stop renting AI. Start building it. This guide transforms you from a passive consumer into a capable builder — installing and running AI on your own computer, then creating homework assistants, research tools, writing coaches, and personal tutors that you control completely. No subscriptions. No data sharing. Just practical skills that compound.
-    </p>
-    <div class="hero-stats">
-      <div class="hstat"><div class="hstat-num">6 Books</div><div class="hstat-label">Compiled</div></div>
-      <div class="hstat"><div class="hstat-num">$9.99</div><div class="hstat-label">Current Price</div></div>
-      <div class="hstat"><div class="hstat-num">$41.94</div><div class="hstat-label">Individual Value</div></div>
-      <div class="hstat"><div class="hstat-num">216 pp</div><div class="hstat-label">Full Guide</div></div>
-    </div>
-    <p style="font-size:0.85rem;color:var(--gold);margin-bottom:1.5rem;font-weight:500;">† 100% of proceeds fund the founding of CivicOS Institute, a pending 501(c)(3) nonprofit.</p>
-    <p style="display:flex;gap:1rem;flex-wrap:wrap;">
-      <a href="https://www.amazon.com/dp/B0GQ5JM6LT" target="_blank" rel="noopener" class="btn-primary btn-large">Buy on Amazon — $9.99 →</a>
-      <a href="https://www.amazon.com/dp/B0GQ5JM6LT" target="_blank" rel="noopener" class="btn-outline btn-large">Paperback or Kindle</a>
-    </p>
-  </div>
-  <div class="book-cover">
-    <div>
-      <div class="cover-institute">CivicOS Institute Press</div>
-      <div class="cover-title">The Open Source <em>Student</em></div>
-      <div class="cover-subtitle">Founders Complete Edition</div>
-    </div>
-    <div class="cover-geo">⬡</div>
-    <div>
-      <div class="cover-edition">Now Live · Intro Pricing</div>
-      <div class="cover-pages">216 pages · Build Your Own AI Tools</div>
-    </div>
-  </div>
-</section>
-
-<!-- Pricing -->
-<section class="sec-dark">
-  <div class="container">
-    <div class="section-label">— Introductory Pricing</div>
-    <div class="pricing-grid">
-      <div class="pricing-left">
-        <h2>Full value,<br>introductory price.</h2>
-        <p>
-          <strong style="color:var(--gold);font-weight:500;">The Open Source Student</strong> compiles the first six volumes of CivicOS Institute's digital book series into a single Founders Complete Edition — 216 pages, covering everything from your first local AI install to building custom tools for homework, research, writing, and tutoring.
-        </p>
-        <div class="pricing-strip">
-          <div class="pricing-card">
-            <div class="label">Ebook (PDF/Kindle)</div>
-            <div class="value">$9.99</div>
-            <div class="note">Instant download</div>
-          </div>
-          <div class="pricing-card">
-            <div class="label">Print Edition</div>
-            <div class="value">$19.99</div>
-            <div class="note">On Amazon</div>
-          </div>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo" aria-label="CivicOS Labs home">CL</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/ebook/" class="active">Ebook</a>
+                <a href="https://civicos-institute.org/">Institute</a>
+                <a href="https://github.com/CivicOSInstitute">GitHub</a>
+            </div>
         </div>
-        <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);">
-          All major credit cards accepted via Amazon. No account required for Kindle purchases.
-        </p>
-      </div>
-      <div class="pricing-right">
-        <div class="price-tag">
-          <div class="num">$9.99</div>
-          <div class="sub">was $41.94 — 76% off</div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <p class="eyebrow">CivicOS Labs / The Open Source Student Series</p>
+            <h1>The Open Source Student</h1>
+            <p class="tagline">Founders Complete Edition — 216 pages. From AI consumer to AI builder.</p>
+            <div style="margin: 24px 0;">
+                <span class="price-tag">$9.99</span>
+                <p class="price-note">Introductory pricing · All six books compiled</p>
+            </div>
+            <div class="btn-group">
+                <a href="https://www.amazon.com/dp/B0GQ5JM6LT" class="btn btn-primary">Get It on Amazon Kindle →</a>
+                <a href="/" class="btn btn-secondary">Back to CivicOS Labs</a>
+            </div>
         </div>
-        <a href="https://www.amazon.com/dp/B0GQ5JM6LT" target="_blank" rel="noopener" class="btn-primary btn-large" style="margin-bottom:0.75rem;">Buy Now on Amazon →</a><br>
-        <a href="https://civicos-institute.org/ebook/" target="_blank" rel="noopener" class="btn-outline">Learn More at CivicOS Institute ↗</a>
-      </div>
-    </div>
-  </div>
-</section>
+    </header>
 
-<!-- What's Inside -->
-<section class="sec">
-  <div class="section-label">What's Inside</div>
-  <div class="inside-grid">
-    <div class="inside-card">
-      <div class="icon">💻</div>
-      <h3>Local AI Setup</h3>
-      <p>Install and run open-source AI on your own computer — Mac, Windows, or Linux. No cloud dependency, no subscriptions, no data leaving your machine.</p>
-    </div>
-    <div class="inside-card">
-      <div class="icon">📚</div>
-      <h3>Homework Assistant</h3>
-      <p>Build a personalized AI tutor that helps with math, science, history, writing, and more. Custom-tailored to your curriculum and learning style.</p>
-    </div>
-    <div class="inside-card">
-      <div class="icon">🔬</div>
-      <h3>Research Tools</h3>
-      <p>Create research assistants that summarize articles, cross-reference sources, generate citations, and help you write better papers — all offline.</p>
-    </div>
-    <div class="inside-card">
-      <div class="icon">✍️</div>
-      <h3>Writing Coach</h3>
-      <p>Train a local AI to provide real-time feedback on your writing — grammar, structure, argument strength, and style — without uploading your work anywhere.</p>
-    </div>
-    <div class="inside-card">
-      <div class="icon">🧑‍🏫</div>
-      <h3>Personal Tutor</h3>
-      <p>Design a custom tutor that adapts to how you learn. Practice problems, explain concepts, quiz you on material — completely private.</p>
-    </div>
-    <div class="inside-card">
-      <div class="icon">🛠️</div>
-      <h3>Build Your Own</h3>
-      <p>By the end, you'll have the skills to design, build, and deploy your own AI tools for any subject. The only limit is your imagination.</p>
-    </div>
-  </div>
-</section>
+    <hr class="section-divider">
 
-<!-- TOC -->
-<section class="sec-dark">
-  <div class="container">
-    <div class="section-label">Table of Contents</div>
-    <div class="toc-grid">
-      <div class="toc-item"><div class="toc-num">Intro</div><div class="toc-title">From the Founder: Why This Matters Now</div></div>
-      <div class="toc-item"><div class="toc-num">Bk 1</div><div class="toc-title">Your First Local AI: Install, Run, and Chat</div></div>
-      <div class="toc-item"><div class="toc-num">Bk 2</div><div class="toc-title">Homework AI: Build a Subject-Specific Personal Tutor</div></div>
-      <div class="toc-item"><div class="toc-num">Bk 3</div><div class="toc-title">Research Companion: Summaries, Citations, and Cross-References</div></div>
-      <div class="toc-item"><div class="toc-num">Bk 4</div><div class="toc-title">Writing Coach: Real-Time Feedback on Any Document</div></div>
-      <div class="toc-item"><div class="toc-num">Bk 5</div><div class="toc-title">Personal Tutor: Adaptive Learning with Local AI</div></div>
-      <div class="toc-item"><div class="toc-num">Bk 6</div><div class="toc-title">Tool Building: From User to Creator of Custom AI</div></div>
-      <div class="toc-item"><div class="toc-num">Appx</div><div class="toc-title">Essential Commands, Troubleshooting, and Model Reference</div></div>
-    </div>
-  </div>
-</section>
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">What it is</p>
+                <h2>Stop renting AI. Start building it.</h2>
+            </div>
+            <p style="max-width: 640px; margin-top: 16px;">This guide transforms you from a passive consumer into a capable builder — installing and running AI on your own computer, then creating homework assistants, research tools, writing coaches, and personal tutors that you control completely. No subscriptions. No data sharing. Just practical skills that compound.</p>
+            <p style="max-width: 640px; margin-top: 16px;"><strong>100% of proceeds fund CivicOS</strong> — building open civic infrastructure for the public good.</p>
+        </div>
+    </section>
 
-<!-- FAQ -->
-<section class="sec">
-  <div class="section-label">Frequently Asked Questions</div>
-  <div class="faq-grid">
-    <div class="faq-item">
-      <h3>Do I need programming experience?</h3>
-      <p>No. The first book walks you through installing and running AI with zero coding. Later books introduce Python gradually — everything is explained step by step.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What hardware do I need?</h3>
-      <p>A reasonably modern laptop or desktop. Mac (Apple Silicon or Intel), Windows, or Linux. At least 8 GB of RAM recommended; 16 GB+ for larger models. No GPU required — CPU-based models work fine for learning.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Is this for students, teachers, or general readers?</h3>
-      <p>All three. Students get homework tools. Teachers get classroom assistants. General readers get a complete introduction to building with AI — no background required.</p>
-    </div>
-    <div class="faq-item">
-      <h3>How is the money used?</h3>
-      <p>100% of proceeds fund the founding of CivicOS Institute — our pending 501(c)(3) nonprofit dedicated to open civic technology, AI literacy, and government transparency. Your purchase directly helps us incorporate, file for tax exemption, and begin operations.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Can I get a refund?</h3>
-      <p>Amazon handles all transactions and offers their standard return policy for Kindle and print books. For any issues, contact us at ncerbone@civicos-institute.org.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Is the book available in bulk or for schools?</h3>
-      <p>Yes. Contact ncerbone@civicos-institute.org for bulk pricing, institutional licenses, or curriculum adoption inquiries.</p>
-    </div>
-  </div>
-</section>
+    <hr class="section-divider">
 
-<!-- Mission -->
-<section class="mission-strip">
-  <h2>Technology that serves <em>people,</em> not vendors.</h2>
-  <p>CivicOS Labs builds open-source tools for civic transparency and government accountability. The Open Source Student series is published under the CivicOS Institute Press — all proceeds directly support our mission.</p>
-  <a href="https://civicos-institute.org/" target="_blank" rel="noopener" class="btn-outline">Visit CivicOS Institute →</a>
-</section>
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">What's included</p>
+                <h2>Six books. One price.</h2>
+            </div>
+            <div class="grid two-col" style="margin-top: 32px;">
+                <div class="card">
+                    <h3>① The Emergency Fix Card</h3>
+                    <p>Quick-reference troubleshooting for when things break. <span style="color: var(--ash); text-decoration: line-through;">$4.99</span></p>
+                </div>
+                <div class="card">
+                    <h3>② The Hardware Guide</h3>
+                    <p>What hardware actually means for AI. RAM, GPUs, and what you really need. <span style="color: var(--ash); text-decoration: line-through;">$5.99</span></p>
+                </div>
+                <div class="card">
+                    <h3>③ The Open Source Student</h3>
+                    <p>The core guide — understanding AI, open source, and the builder mindset. <span style="color: var(--ash); text-decoration: line-through;">$9.99</span></p>
+                </div>
+                <div class="card">
+                    <h3>④ Operational Guide</h3>
+                    <p>Running models day-to-day. Maintenance, updates, and keeping things working. <span style="color: var(--ash); text-decoration: line-through;">$5.99</span></p>
+                </div>
+                <div class="card">
+                    <h3>⑤ Student Setup Checklist</h3>
+                    <p>Step-by-step checklist from unboxing to first AI conversation. <span style="color: var(--ash); text-decoration: line-through;">$4.99</span></p>
+                </div>
+                <div class="card">
+                    <h3>⑥ The Terminal Survival Guide</h3>
+                    <p>Command-line fluency for students who have never opened a terminal. <span style="color: var(--ash); text-decoration: line-through;">$9.99</span></p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px; padding: 28px; border: 1px solid var(--line-strong);">
+                <p style="color: var(--ash); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;">Individual value $41.94</p>
+                <span class="price-tag" style="font-size: 36px;">$9.99</span>
+                <p class="price-note">Founders Complete Edition — saves $31.95</p>
+            </div>
+        </div>
+    </section>
 
-<footer>
-  <p>CivicOS Labs is a project of CivicOS Institute, a pending 501(c)(3) nonprofit organization.</p>
-  <p style="margin-top:0.5rem;">&copy; 2026 CivicOS Institute &mdash; All rights reserved. <a href="https://civicos-institute.org/">civicos-institute.org</a></p>
-</footer>
+    <hr class="section-divider">
 
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">Inside the book</p>
+                <h2>Chapter by chapter</h2>
+            </div>
+            <div class="grid two-col" style="margin-top: 32px;">
+                <div class="card">
+                    <p class="section-label" style="margin-bottom: 8px;">01 — Foundation</p>
+                    <h3>Understanding AI & Open Source</h3>
+                    <p>What AI actually is — without the hype. Why open source matters. The builder mindset.</p>
+                    <p style="color: var(--ash); font-family: var(--mono); font-size: 0.72rem; margin-top: 8px;">~36 pages</p>
+                </div>
+                <div class="card">
+                    <p class="section-label" style="margin-bottom: 8px;">02 — Setup</p>
+                    <h3>Hardware & Installation</h3>
+                    <p>Installing Ollama on Mac, Windows, or Linux. Your first model download. Command-line basics.</p>
+                    <p style="color: var(--ash); font-family: var(--mono); font-size: 0.72rem; margin-top: 8px;">~28 pages</p>
+                </div>
+                <div class="card">
+                    <p class="section-label" style="margin-bottom: 8px;">03 — Core Skills</p>
+                    <h3>Running & Prompting AI</h3>
+                    <p>Starting your first model. Good prompts. Multi-turn conversations. Evaluating responses.</p>
+                    <p style="color: var(--ash); font-family: var(--mono); font-size: 0.72rem; margin-top: 8px;">~32 pages</p>
+                </div>
+                <div class="card">
+                    <p class="section-label" style="margin-bottom: 8px;">04 — Building Tools</p>
+                    <h3>Four Practical Assistants</h3>
+                    <p>Homework Assistant, Research Assistant, Writing Assistant, Personal Tutor — tools you control.</p>
+                    <p style="color: var(--ash); font-family: var(--mono); font-size: 0.72rem; margin-top: 8px;">~64 pages</p>
+                </div>
+                <div class="card">
+                    <p class="section-label" style="margin-bottom: 8px;">05 — Agents & Mastery</p>
+                    <h3>AI Agents & Responsible Use</h3>
+                    <p>Creating agents. Academic integrity. Privacy, ethics, and knowing when to struggle.</p>
+                    <p style="color: var(--ash); font-family: var(--mono); font-size: 0.72rem; margin-top: 8px;">~32 pages</p>
+                </div>
+                <div class="card">
+                    <p class="section-label" style="margin-bottom: 8px;">06 — Appendix</p>
+                    <h3>Reference & Next Steps</h3>
+                    <p>Command reference, troubleshooting, model comparison, and continued learning paths.</p>
+                    <p style="color: var(--ash); font-family: var(--mono); font-size: 0.72rem; margin-top: 8px;">~24 pages</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="book-cta">
+        <div class="container">
+            <div class="book-cta-card">
+                <div>
+                    <p class="eyebrow">Get it now</p>
+                    <h2>Start building today.</h2>
+                    <p>Available on Amazon Kindle. Paperback also available. 100% of proceeds fund CivicOS.</p>
+                </div>
+                <div class="book-cta-actions">
+                    <a href="https://www.amazon.com/dp/B0GQ5JM6LT" class="btn btn-primary">Buy on Kindle — $9.99</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 CivicOS Labs, LLC. All rights reserved. · <a href="https://civicos-institute.org/">CivicOS Institute</a> · <a href="https://github.com/CivicOSInstitute">GitHub</a> · <a href="https://x.com/CivicOSInstitut">X</a></p>
+        </div>
+    </footer>
 </body>
 </html>
