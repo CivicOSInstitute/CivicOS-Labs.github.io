@@ -1,6 +1,5 @@
 # CivicOS Labs
 
-Open civic infrastructure for the public good.
+Open civic infrastructure, AI literacy products, and accountability tooling for the public good.
 
-Visit: [www.civicoslabs.com](https://www.civicoslabs.com)
-
+Visit: [civicoslabs.com](https://civicoslabs.com)
