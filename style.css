@@ -298,6 +298,81 @@ section .section-head p { max-width: 680px; }
     border: 1px solid var(--line-strong);
 }
 
+.chapter-preview .section-head p:not(.section-label) {
+    color: var(--ash);
+}
+
+.chapter-flip-grid { align-items: stretch; }
+
+.flip-card {
+    min-height: 270px;
+    perspective: 1200px;
+    cursor: pointer;
+    outline: none;
+}
+
+.flip-card-inner {
+    position: relative;
+    min-height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    padding: 28px;
+    background:
+        linear-gradient(rgba(243, 234, 220, 0.018) 1px, transparent 1px),
+        var(--black);
+    background-size: 100% 18px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.flip-face h3 {
+    font-size: 22px;
+    margin: 12px 0;
+}
+
+.flip-face p:not(.section-label) {
+    font-size: 15px;
+}
+
+.flip-card:hover .flip-front,
+.flip-card:focus-visible .flip-front,
+.flip-card.is-flipped .flip-back {
+    border-color: var(--line-strong);
+}
+
+.flip-back {
+    transform: rotateY(180deg);
+    border-color: var(--line-strong);
+    background:
+        linear-gradient(135deg, rgba(211, 75, 47, 0.12), transparent 42%),
+        linear-gradient(rgba(243, 234, 220, 0.022) 1px, transparent 1px),
+        var(--black-soft);
+    background-size: auto, 100% 18px, auto;
+}
+
+.flip-hint {
+    margin-top: auto;
+    padding-top: 18px;
+    color: var(--ember);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
 .disclosure-card, .contact-strip {
     display: grid;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
@@ -369,4 +444,11 @@ footer a:hover { color: var(--ember); }
 @media (max-width: 340px) {
     .nav-links a { font-size: 0.62rem; padding-inline: 4px; }
     .nav-links a[href="#projects"], .nav-links a[href="/#projects"] { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .flip-card-inner, .btn, .card, .nav-links a {
+        transition: none;
+    }
 }

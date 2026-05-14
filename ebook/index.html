@@ -145,43 +145,110 @@
 
     <hr class="section-divider">
 
-    <section>
+    <section class="chapter-preview" aria-labelledby="chapter-preview-title">
         <div class="container">
             <div class="section-head">
-                <p class="section-label">Chapter by chapter</p>
-                <h2>A practical path from first install to useful tools.</h2>
+                <p class="section-label">Inside the book</p>
+                <h2 id="chapter-preview-title">Chapter by chapter</h2>
+                <p>Tap a card to preview a short sample from that part of the guide.</p>
             </div>
-            <div class="grid two-col">
-                <div class="card">
-                    <p class="section-label">01 — Foundation</p>
-                    <h3>Understanding AI and open source</h3>
-                    <p>What AI actually is, why open source matters, and how to think like a builder instead of a consumer.</p>
-                </div>
-                <div class="card">
-                    <p class="section-label">02 — Setup</p>
-                    <h3>Hardware and installation</h3>
-                    <p>Installing Ollama on Mac, Windows, or Linux. Your first model download. Command-line basics.</p>
-                </div>
-                <div class="card">
-                    <p class="section-label">03 — Core skills</p>
-                    <h3>Running and prompting AI</h3>
-                    <p>Starting your first model, writing better prompts, using multi-turn conversations, and evaluating responses.</p>
-                </div>
-                <div class="card">
-                    <p class="section-label">04 — Building tools</p>
-                    <h3>Four practical assistants</h3>
-                    <p>Homework Assistant, Research Assistant, Writing Assistant, and Personal Tutor: tools you control.</p>
-                </div>
-                <div class="card">
-                    <p class="section-label">05 — Mastery</p>
-                    <h3>Agents and responsible use</h3>
-                    <p>Creating simple agents, handling academic integrity, protecting privacy, and knowing when to struggle.</p>
-                </div>
-                <div class="card">
-                    <p class="section-label">06 — Reference</p>
-                    <h3>Commands and next steps</h3>
-                    <p>Troubleshooting, model comparison, command reference, and continued learning paths.</p>
-                </div>
+            <div class="grid two-col chapter-flip-grid" data-flip-group>
+                <article class="flip-card" role="button" tabindex="0" aria-pressed="false">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <p class="section-label">01 — Foundation</p>
+                            <h3>Understanding AI and open source</h3>
+                            <p>What AI actually is, why open source matters, and how to think like a builder instead of a consumer.</p>
+                            <span class="flip-hint">Preview sample →</span>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <p class="section-label">Sample</p>
+                            <h3>The builder shift</h3>
+                            <p>Most people meet AI as a rented chat window. Builders ask a different first question: where does the model run, what data touches it, and what can I make it do on my own machine?</p>
+                            <span class="flip-hint">Click another card to reset</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="flip-card" role="button" tabindex="0" aria-pressed="false">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <p class="section-label">02 — Setup</p>
+                            <h3>Hardware and installation</h3>
+                            <p>Installing Ollama on Mac, Windows, or Linux. Your first model download. Command-line basics.</p>
+                            <span class="flip-hint">Preview sample →</span>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <p class="section-label">Sample</p>
+                            <h3>Your first local model</h3>
+                            <p>Installation is not the finish line. The real moment is when you run a model locally, ask a question, and realize the response did not leave your computer to exist.</p>
+                            <span class="flip-hint">Click another card to reset</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="flip-card" role="button" tabindex="0" aria-pressed="false">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <p class="section-label">03 — Core skills</p>
+                            <h3>Running and prompting AI</h3>
+                            <p>Starting your first model, writing better prompts, using multi-turn conversations, and evaluating responses.</p>
+                            <span class="flip-hint">Preview sample →</span>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <p class="section-label">Sample</p>
+                            <h3>Prompting as a skill</h3>
+                            <p>A good prompt is not magic phrasing. It is a clear assignment: role, goal, context, constraints, and a way to check whether the answer is useful.</p>
+                            <span class="flip-hint">Click another card to reset</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="flip-card" role="button" tabindex="0" aria-pressed="false">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <p class="section-label">04 — Building tools</p>
+                            <h3>Four practical assistants</h3>
+                            <p>Homework Assistant, Research Assistant, Writing Assistant, and Personal Tutor: tools you control.</p>
+                            <span class="flip-hint">Preview sample →</span>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <p class="section-label">Sample</p>
+                            <h3>The homework assistant</h3>
+                            <p>The goal is not to give students answers faster. The goal is to create a tool that asks better questions, reveals the next step, and keeps the learning in the student’s hands.</p>
+                            <span class="flip-hint">Click another card to reset</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="flip-card" role="button" tabindex="0" aria-pressed="false">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <p class="section-label">05 — Mastery</p>
+                            <h3>Agents and responsible use</h3>
+                            <p>Creating simple agents, handling academic integrity, protecting privacy, and knowing when to struggle.</p>
+                            <span class="flip-hint">Preview sample →</span>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <p class="section-label">Sample</p>
+                            <h3>Responsibility is design</h3>
+                            <p>Responsible AI use is not a warning label at the end. It is built into the tool: what it refuses to do, what it explains, and when it sends you back to your own effort.</p>
+                            <span class="flip-hint">Click another card to reset</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="flip-card" role="button" tabindex="0" aria-pressed="false">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <p class="section-label">06 — Reference</p>
+                            <h3>Commands and next steps</h3>
+                            <p>Troubleshooting, model comparison, command reference, and continued learning paths.</p>
+                            <span class="flip-hint">Preview sample →</span>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <p class="section-label">Sample</p>
+                            <h3>When something breaks</h3>
+                            <p>Debugging starts with the smallest honest observation: what command did you run, what changed, what message appeared, and what is the next smallest thing you can test?</p>
+                            <span class="flip-hint">Click another card to reset</span>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
@@ -210,5 +277,42 @@
             <p><a href="https://civicos-institute.org/" target="_blank" rel="noopener">CivicOS Institute</a> · <a href="https://github.com/CivicOSInstitute" target="_blank" rel="noopener">GitHub</a> · <a href="https://x.com/CivicOSInstitut" target="_blank" rel="noopener">X</a></p>
         </div>
     </footer>
+    <script>
+        document.querySelectorAll('[data-flip-group]').forEach((group) => {
+            const cards = Array.from(group.querySelectorAll('.flip-card'));
+            const syncCardState = (card) => {
+                const isOpen = card.classList.contains('is-flipped');
+                card.setAttribute('aria-pressed', String(isOpen));
+                card.querySelector('.flip-front')?.setAttribute('aria-hidden', String(isOpen));
+                card.querySelector('.flip-back')?.setAttribute('aria-hidden', String(!isOpen));
+            };
+            const closeCards = (except) => {
+                cards.forEach((card) => {
+                    if (card !== except) {
+                        card.classList.remove('is-flipped');
+                        syncCardState(card);
+                    }
+                });
+            };
+
+            cards.forEach((card) => {
+                syncCardState(card);
+                const toggleCard = () => {
+                    const willOpen = !card.classList.contains('is-flipped');
+                    closeCards(card);
+                    card.classList.toggle('is-flipped', willOpen);
+                    syncCardState(card);
+                };
+
+                card.addEventListener('click', toggleCard);
+                card.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        toggleCard();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
