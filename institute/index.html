@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CivicOS Labs, LLC exists to facilitate the formation of CivicOS Institute — a planned nonprofit building open civic infrastructure. Our legal structure, commitments, and timeline.">
+    <title>CivicOS Institute Formation — CivicOS Labs</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .content-section {
+            padding: 60px 0;
+        }
+        .content-section p {
+            max-width: 680px;
+            margin-top: 16px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        .content-section p:first-of-type {
+            margin-top: 0;
+        }
+        .content-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .content-section .eyebrow {
+            margin-bottom: 12px;
+        }
+        .content-section ul, .content-section ol {
+            max-width: 680px;
+            margin-top: 16px;
+            padding-left: 24px;
+            color: var(--paper-dim);
+            line-height: 2;
+        }
+        .content-section li {
+            margin-bottom: 4px;
+        }
+        .content-section li strong {
+            color: var(--paper);
+        }
+        .structure-block {
+            max-width: 680px;
+            margin-top: 32px;
+            padding: 32px;
+            border: 1px solid var(--line);
+        }
+        .structure-block .box {
+            padding: 20px 24px;
+            text-align: center;
+        }
+        .structure-block .box-current {
+            border: 2px solid var(--ember);
+        }
+        .structure-block .box-future {
+            border: 2px dashed var(--line);
+        }
+        .structure-block .box-sub {
+            border: 1px solid var(--line);
+            margin-top: 16px;
+        }
+        .structure-block .box-label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ash);
+            margin-top: 8px;
+        }
+        .arrow-row {
+            text-align: center;
+            padding: 8px 0;
+            color: var(--ash);
+            font-size: 20px;
+        }
+        .structure-note {
+            margin-top: 24px;
+            font-size: 15px;
+            color: var(--ash);
+            text-align: center;
+        }
+        .faq-list {
+            max-width: 680px;
+            margin-top: 24px;
+        }
+        .faq-item {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .faq-item:first-of-type {
+            border-top: 1px solid var(--line);
+        }
+        .faq-q {
+            font-family: var(--sans);
+            font-weight: 600;
+            color: var(--paper);
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+        .faq-a {
+            font-size: 15px;
+            color: var(--paper-dim);
+            line-height: 1.7;
+        }
+        .callout {
+            max-width: 680px;
+            margin-top: 24px;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--ember);
+        }
+        .callout-title {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ember);
+            margin-bottom: 8px;
+        }
+        .callout p {
+            margin-top: 8px;
+            font-size: 15px;
+        }
+        .timeline-item {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+            max-width: 680px;
+        }
+        .timeline-item:last-of-type {
+            border-bottom: none;
+        }
+        .timeline-label {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ember);
+            margin-bottom: 4px;
+        }
+        .timeline-item h3 {
+            font-size: 17px;
+            font-family: var(--sans);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .timeline-item p {
+            margin-top: 0;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo" aria-label="CivicOS Labs home">CL</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/ebook/">Ebook</a>
+                <a href="/governance/">Governance</a>
+                <a href="https://civicos-institute.org/" class="nav-optional" target="_blank" rel="noopener">Institute</a>
+                <a href="mailto:NCerbone@civicos-institute.org?subject=CivicOS%20Labs%20formation%20question">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <p class="eyebrow">CivicOS Labs / Formation / 2026</p>
+            <h1>The CivicOS Institute is the mission.<br>The LLC is how we start.</h1>
+            <p class="tagline">CivicOS Labs, LLC exists for one reason: to facilitate the formation of the CivicOS Institute, a planned nonprofit organization dedicated to open civic infrastructure, government accountability, and transparent public procurement.</p>
+            <div class="btn-group">
+                <a href="#structure" class="btn btn-secondary">How it works</a>
+                <a href="#faq" class="btn btn-secondary">FAQ</a>
+            </div>
+        </div>
+    </header>
+
+    <hr class="section-divider">
+
+    <section id="structure" class="content-section">
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">Current structure</p>
+                <h2>Designed for transfer from day one.</h2>
+            </div>
+
+            <div class="structure-block">
+                <div class="box box-future">
+                    <strong style="font-size: 18px; font-family: var(--serif); color: var(--paper);">CivicOS Institute</strong>
+                    <div class="box-label">Planned 501(c)(3) nonprofit — not yet formed</div>
+                </div>
+                <div class="arrow-row">↓</div>
+                <div class="box box-current">
+                    <strong style="font-size: 18px; font-family: var(--serif); color: var(--paper);">CivicOS Labs, LLC</strong>
+                    <div class="box-label">Current operating entity — Florida limited liability company</div>
+                </div>
+                <p class="structure-note">
+                    Once the Institute is fully formed and an independent board is seated,<br>
+                    the LLC will be transferred to become a <strong style="color: var(--paper);">wholly owned subsidiary</strong> of the nonprofit.
+                </p>
+            </div>
+
+            <p>CivicOS Institute is the mission — a privacy-first, vendor-independent nonprofit building open civic infrastructure for the public good. But a nonprofit doesn't appear overnight. It requires incorporation, IRS determination, an independent board, bylaws, and governance infrastructure. That process takes time.</p>
+
+            <p><strong style="color: var(--paper);">CivicOS Labs, LLC exists to do the work that can't wait:</strong> filing public records requests, publishing findings, building tools, accepting formation support, and proving the model before the nonprofit doors open.</p>
+
+            <p style="font-family: var(--serif); font-size: 20px; color: var(--paper);">The LLC is not the organization. It is the scaffold.</p>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="content-section">
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">Why an LLC first</p>
+                <h2>A practical step, not a permanent choice.</h2>
+            </div>
+
+            <p>Forming a 501(c)(3) nonprofit takes time — typically 6 to 12 months from filing to IRS determination. In that gap, an operating entity is needed to:</p>
+
+            <ul>
+                <li><strong>Accept resources</strong> — people who believe in the mission can support it now, not after a government determination letter arrives.</li>
+                <li><strong>Enter contracts</strong> — developers, vendors, and service providers need a legal counterparty.</li>
+                <li><strong>Hold intellectual property</strong> — source code, trademarks, and research produced during formation should be owned by the mission, not by any individual.</li>
+                <li><strong>Build the evidence base</strong> — public records, research, and tooling that will become the Institute's initial body of work.</li>
+            </ul>
+
+            <p>The LLC is not an end-run around nonprofit governance. It is a <strong style="color: var(--paper);">standard pre-formation vehicle</strong> — designed to preserve momentum during a necessarily slow legal process.</p>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="content-section">
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">The commitment</p>
+                <h2>Transfer when ready. Not optional.</h2>
+            </div>
+
+            <p>Once CivicOS Institute is fully formed as a recognized tax-exempt nonprofit and an independent board is seated, the following will happen:</p>
+
+            <ol>
+                <li><strong>CivicOS Labs, LLC will be transferred</strong> to become a wholly owned subsidiary of the CivicOS Institute.</li>
+                <li>The Institute's independent board will have <strong>full governance authority</strong> over the LLC and all of its assets.</li>
+                <li>All intellectual property, contracts, and assets held by the LLC will <strong>belong to the nonprofit</strong>.</li>
+                <li>The Institute may continue using the LLC as an operational subsidiary, dissolve it, or restructure it — at <strong>the board's sole discretion</strong>.</li>
+            </ol>
+
+            <div class="callout">
+                <div class="callout-title">Not optional, not discretionary</div>
+                <p>The LLC's founding documents require transfer to a qualified nonprofit once the Institute is formed and an independent board is seated. This commitment is enforceable regardless of who manages the LLC at the time of transfer.</p>
+            </div>
+
+            <p>Until transfer, the LLC operates under a governance commitment equivalent to a nonprofit: mission-locked, nonpartisan, and accountable to the public interest. No founder has personal ownership rights to the organization's intellectual property or assets beyond standard compensation for work performed.</p>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="content-section">
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">Timeline</p>
+                <h2>Building in the open.</h2>
+            </div>
+
+            <div class="timeline-item">
+                <p class="timeline-label">Now</p>
+                <h3>CivicOS Labs, LLC — operational</h3>
+                <p>FOIA filings active across six Florida jurisdictions. Ebook publishing underway. SME research pipeline running. Formation support program preparing.</p>
+            </div>
+            <div class="timeline-item">
+                <p class="timeline-label" style="color: var(--ash);">Mid 2026</p>
+                <h3>Institute formation begins</h3>
+                <p>Articles of incorporation, bylaws, independent board recruitment, IRS Form 1023 preparation, charitable solicitation review.</p>
+            </div>
+            <div class="timeline-item">
+                <p class="timeline-label" style="color: var(--ash);">Late 2026 / Early 2027</p>
+                <h3>IRS determination and transfer</h3>
+                <p>501(c)(3) determination, independent board seated, LLC transferred as wholly owned subsidiary. Full nonprofit governance in effect.</p>
+            </div>
+
+            <p>These dates are estimates. The legal process will not be rushed, and the board will not be seated until the governance structure is strong enough to serve the mission independently.</p>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="content-section">
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">What we're building now</p>
+                <h2>Evidence first. Revenue parallel.</h2>
+            </div>
+            <div class="grid two-col" style="margin-top: 32px;">
+                <div class="card">
+                    <p class="section-label" style="margin-bottom: 8px; color: var(--ember);">Evidence lane</p>
+                    <h3>Public records, transparency, accountability</h3>
+                    <p>FOIA filings across six Florida jurisdictions. Procurement data analysis. Public findings published when the evidence supports them. No claims before proof.</p>
+                </div>
+                <div class="card">
+                    <p class="section-label" style="margin-bottom: 8px; color: var(--ember);">Revenue lane</p>
+                    <h3>Products, publications, founding support</h3>
+                    <p>Ebooks, tools, and a Founding 25 formation-support program to fund the build. All revenue flows through Labs until Institute can receive funds directly.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px;">
+                <p style="font-family: var(--serif); font-size: 20px; color: var(--paper);">The work should not wait for a letter from the IRS.</p>
+                <p>Public procurement data grows stale. FOIA requests have statutory deadlines. School boards and city councils make decisions every week that affect millions of people. A 12-month formation window should not mean 12 months of silence.</p>
+                <p>The LLC allows us to <strong style="color: var(--paper);">build the evidence base, develop the tools, and demonstrate the method</strong> so that the CivicOS Institute launches with a body of work — not just a promise of work to come.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="content-section">
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">For supporters</p>
+                <h2>What this means for people joining now.</h2>
+            </div>
+
+            <div class="callout">
+                <div class="callout-title">Important: Not legal, tax, or financial advice</div>
+                <p>Contributions to CivicOS Labs, LLC are <strong style="color: var(--paper);">not tax-deductible</strong> as charitable donations. Once CivicOS Institute is formed and the LLC is transferred, prior supporters will have no special governance rights unless formally appointed to the board. We encourage every potential supporter to consult their own legal and tax advisors.</p>
+            </div>
+
+            <p>Supporters joining before the Institute is formed are helping build the institution itself — funding the research, tools, and operational capacity that will become the Institute's initial endowment of work.</p>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section id="faq" class="content-section">
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">FAQ</p>
+                <h2>Common questions.</h2>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-q">Is CivicOS Labs a nonprofit?</div>
+                    <div class="faq-a">No, not yet. CivicOS Labs is currently a Florida limited liability company. CivicOS Institute is the planned nonprofit, but it has not been formed or received tax-exempt determination from the IRS.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Are contributions tax-deductible?</div>
+                    <div class="faq-a">No. Contributions to the LLC are not tax-deductible as charitable donations. We will clearly communicate all changes in tax treatment if and when the Institute is formed and contributions become deductible.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Could the LLC decide not to transfer?</div>
+                    <div class="faq-a">No. The LLC's founding documents and governance commitments require transfer to a qualified nonprofit once the Institute is formed and an independent board is seated. This is not a discretionary decision — it is the entire reason the LLC exists.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Who controls the LLC now?</div>
+                    <div class="faq-a">The LLC is managed by its founder, Nick Cerbone, who serves as director during the formation phase. All material decisions — including financial commitments, intellectual property assignments, and governance changes — are documented and will be fully transparent to the Institute's future board.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Why two websites — civicoslabs.com and civicos-institute.org?</div>
+                    <div class="faq-a">civicoslabs.com is the Labs LLC's operational site, where current work, products, and formation updates live. civicos-institute.org is reserved for the future Institute. Once the nonprofit is formed, civicos-institute.org will become the primary public face.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What happens if the Institute is never formed?</div>
+                    <div class="faq-a">If the Institute cannot be formed — due to legal, financial, or other barriers — the LLC's assets will be transferred to another qualified nonprofit with a compatible mission, or dissolved and distributed per Florida law. The mission assets will not revert to private ownership.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="content-section">
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">The mission</p>
+                <h2>Open civic infrastructure for the public good.</h2>
+            </div>
+
+            <div style="max-width: 680px;">
+                <p>CivicOS exists to make government operations visible, understandable, and accountable. We build open-source tools for civic transparency — so every community has the infrastructure it deserves.</p>
+                <p style="font-family: var(--serif); font-size: 20px; color: var(--paper); margin-top: 24px;">The LLC is how we start. The nonprofit is how we last.</p>
+            </div>
+
+            <div class="btn-group" style="margin-top: 32px;">
+                <a href="/" class="btn btn-primary">Back to Labs</a>
+                <a href="/governance/" class="btn btn-secondary">Governance →</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 CivicOS Labs, LLC. All rights reserved. · <a href="/governance/">Governance</a> · <a href="https://civicos-institute.org/" target="_blank" rel="noopener">CivicOS Institute</a> · <a href="https://github.com/CivicOSInstitute" target="_blank" rel="noopener">GitHub</a> · <a href="https://x.com/CivicOSInstitut" target="_blank" rel="noopener">X</a></p>
+        </div>
+    </footer>
+</body>
+</html>
