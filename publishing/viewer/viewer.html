@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Document Viewer</title>
     <style>
         * {
@@ -12,11 +14,12 @@
             -moz-user-select: none !important;
             user-select: none !important;
             -webkit-touch-callout: none !important;
+            -webkit-user-drag: none !important;
         }
         html, body {
             margin: 0;
             padding: 0;
-            background: #1a1a1a;
+            background: #0d0b0a;
             height: 100%;
             overflow: hidden;
         }
@@ -25,7 +28,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(13,11,10,0.95);
+            background: rgba(13,11,10,0.97);
             border-top: 1px solid rgba(243,234,220,0.18);
             padding: 0.5rem 1rem;
             display: flex;
@@ -52,16 +55,10 @@
             border-color: rgba(211,75,47,0.58);
             color: #d34b2f;
         }
-        .controls .page-info {
-            min-width: 80px;
-            text-align: center;
-        }
+        .controls .page-info { min-width: 80px; text-align: center; }
         .pages-container {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 42px;
+            top: 0; left: 0; right: 0; bottom: 42px;
             overflow-y: auto;
             overflow-x: hidden;
             display: flex;
@@ -70,11 +67,11 @@
             padding: 1rem;
             gap: 0.5rem;
             scrollbar-width: thin;
-            scrollbar-color: #8c8175 #1a1a1a;
+            scrollbar-color: #8c8175 #0d0b0a;
         }
         .pages-container::-webkit-scrollbar { width: 6px; }
-        .pages-container::-webkit-scrollbar-track { background: #1a1a1a; }
-        .pages-container::-webkit-scrollbar-thumb { background: #8c8175; border-radius: 0; }
+        .pages-container::-webkit-scrollbar-track { background: #0d0b0a; }
+        .pages-container::-webkit-scrollbar-thumb { background: #8c8175; }
         .pages-container canvas {
             display: block;
             max-width: 100%;
@@ -93,7 +90,6 @@
     <div class="pages-container" id="pagesContainer">
         <p class="loading" id="loadingMsg">Loading document…</p>
     </div>
-
     <div class="controls">
         <button id="btnPrev">← Prev</button>
         <span class="page-info" id="pageInfo">1 / …</span>
@@ -108,7 +104,33 @@
 
         pdfjsLib.GlobalWorkerOptions.workerSrc = './pdf.worker.min.mjs';
 
-        const PDF_URL = '/publishing/assets/The_Open_Source_Student_FL_Educator_Edition_v1_0.pdf';
+        // Auth gate — must be authenticated to load any PDF data
+        const SESSION_KEY = 'civicos_pub_auth';
+        const SESSION_DURATION = 8 * 60 * 60 * 1000;
+
+        function isAuthenticated() {
+            try {
+                const raw = sessionStorage.getItem(SESSION_KEY);
+                if (!raw) return false;
+                const session = JSON.parse(raw);
+                if (!session.ts || !session.token) return false;
+                if (Date.now() - session.ts > SESSION_DURATION) {
+                    sessionStorage.removeItem(SESSION_KEY);
+                    return false;
+                }
+                return true;
+            } catch(e) { return false; }
+        }
+
+        if (!isAuthenticated()) {
+            window.location.replace('/publishing/login/');
+            throw new Error('Not authenticated');
+        }
+
+        // PDF is loaded as binary blob then fed to PDF.js — never a direct URL
+        // This prevents browser's native PDF viewer from intercepting
+        const PDF_PATH = '/publishing/assets/cvl_7f2a91b4e3_d0c8.pdf';
+
         const container = document.getElementById('pagesContainer');
         const loadingMsg = document.getElementById('loadingMsg');
         const pageInfo = document.getElementById('pageInfo');
@@ -122,36 +144,27 @@
         async function renderPage(pageNum) {
             const page = await pdfDoc.getPage(pageNum);
             const viewport = page.getViewport({ scale });
-
-            // Reuse or create canvas
             let canvas = pageCanvases[pageNum - 1];
             if (!canvas) {
                 canvas = document.createElement('canvas');
-                canvas.id = 'page-' + pageNum;
                 pageCanvases[pageNum - 1] = canvas;
             }
-
             canvas.width = viewport.width;
             canvas.height = viewport.height;
-
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             await page.render({ canvasContext: ctx, viewport }).promise;
             return canvas;
         }
 
         async function renderAllPages() {
             loadingMsg.style.display = 'block';
-            // Clear old canvases from DOM
             pageCanvases.forEach(c => { if (c && c.parentNode) c.parentNode.removeChild(c); });
             pageCanvases = [];
-
             for (let i = 1; i <= pdfDoc.numPages; i++) {
                 const canvas = await renderPage(i);
                 container.appendChild(canvas);
             }
-
             loadingMsg.style.display = 'none';
             pageInfo.textContent = '1 / ' + pdfDoc.numPages;
             scrollToPage(1);
@@ -159,13 +172,10 @@
 
         function scrollToPage(num) {
             const canvas = pageCanvases[num - 1];
-            if (canvas) {
-                canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            if (canvas) canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
             pageInfo.textContent = num + ' / ' + pdfDoc.numPages;
         }
 
-        // Controls
         document.getElementById('btnPrev').addEventListener('click', () => {
             if (currentPage > 1) { currentPage--; scrollToPage(currentPage); }
         });
@@ -183,7 +193,6 @@
             renderAllPages();
         });
 
-        // Track visible page on scroll
         container.addEventListener('scroll', () => {
             for (let i = 0; i < pageCanvases.length; i++) {
                 const c = pageCanvases[i];
@@ -197,20 +206,38 @@
             }
         });
 
-        // Block all interaction within the viewer iframe
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('copy', e => e.preventDefault());
-        document.addEventListener('selectstart', e => e.preventDefault());
-        document.addEventListener('dragstart', e => e.preventDefault());
-
-        // Load the PDF
+        // Load PDF as ArrayBuffer — bypasses browser's native PDF plugin
         try {
-            pdfDoc = await pdfjsLib.getDocument(PDF_URL).promise;
+            const response = await fetch(PDF_PATH);
+            const arrayBuffer = await response.arrayBuffer();
+            const typedArray = new Uint8Array(arrayBuffer);
+            pdfDoc = await pdfjsLib.getDocument({ data: typedArray }).promise;
             await renderAllPages();
         } catch (err) {
             loadingMsg.textContent = 'Failed to load document.';
             console.error(err);
         }
+
+        // Block everything
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('copy', e => e.preventDefault());
+        document.addEventListener('cut', e => e.preventDefault());
+        document.addEventListener('selectstart', e => e.preventDefault());
+        document.addEventListener('dragstart', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            const blocked = ['c','u','s','p','a'];
+            if ((e.ctrlKey || e.metaKey) && blocked.indexOf(e.key.toLowerCase()) !== -1) e.preventDefault();
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'i') e.preventDefault();
+            if (e.key === 'F12') e.preventDefault();
+            if (e.key === 'PrintScreen') e.preventDefault();
+        });
+
+        // PrintScreen capture prevention (clears clipboard)
+        document.addEventListener('keyup', e => {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText('').catch(() => {});
+            }
+        });
     </script>
 </body>
 </html>
