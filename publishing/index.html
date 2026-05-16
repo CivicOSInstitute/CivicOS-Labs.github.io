@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>CivicOS Labs — Curriculum Dashboard</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/style.css">
@@ -30,6 +33,23 @@
             gap: 1rem;
         }
         .dash-header .section-label { margin: 0; }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .timeout-badge {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.06em;
+            color: var(--ash);
+            padding: 0.3rem 0.6rem;
+            border: 1px solid var(--line);
+        }
+        .timeout-badge.warn {
+            color: var(--ember);
+            border-color: var(--ember);
+        }
         .logout-btn {
             font-family: var(--mono);
             font-size: 0.75rem;
@@ -117,13 +137,62 @@
             font-family: var(--mono);
             letter-spacing: 0.02em;
         }
+        .timeout-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(5,5,4,0.97);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .timeout-overlay.visible { display: flex; }
+        .timeout-box {
+            width: min(400px, 90%);
+            padding: 2.5rem;
+            border: 1px solid var(--line-strong);
+            background: var(--black-soft);
+            text-align: center;
+        }
+        .timeout-box h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .timeout-box p {
+            color: var(--ash);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        .timeout-box a {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--paper);
+            background: var(--ember);
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
+    <!-- Timeout overlay -->
+    <div class="timeout-overlay" id="timeoutOverlay">
+        <div class="timeout-box">
+            <h2>Session Expired</h2>
+            <p>Your session timed out due to inactivity. Log in again to continue.</p>
+            <a href="/publishing/login/">Log In →</a>
+        </div>
+    </div>
+
     <div class="dash-header">
         <div class="container">
             <span class="section-label">CivicOS Labs / Publishing / Curriculum</span>
-            <button class="logout-btn" onclick="logout()">Logout →</button>
+            <div class="header-right">
+                <span class="timeout-badge" id="timeoutBadge" title="Time until auto-logout">45:00</span>
+                <button class="logout-btn" onclick="logout()">Logout →</button>
+            </div>
         </div>
     </div>
 
@@ -159,7 +228,10 @@
     (function() {
         var SESSION_KEY = 'civicos_pub_auth';
         var SESSION_DURATION = 8 * 60 * 60 * 1000;
+        var INACTIVITY_TIMEOUT = 45 * 60 * 1000; // 45 minutes
+        var WARNING_THRESHOLD = 5 * 60 * 1000; // warn at 5 min remaining
 
+        // --- Auth gate ---
         function isAuthenticated() {
             try {
                 var raw = sessionStorage.getItem(SESSION_KEY);
@@ -176,13 +248,50 @@
 
         if (!isAuthenticated()) {
             window.location.replace('/publishing/login/');
+            return;
         }
 
-        window.logout = function() {
-            sessionStorage.removeItem(SESSION_KEY);
-            window.location.replace('/publishing/login/');
-        };
+        // --- Inactivity timeout ---
+        var lastActivity = Date.now();
+        var badge = document.getElementById('timeoutBadge');
+        var overlay = document.getElementById('timeoutOverlay');
 
+        function resetActivity() {
+            lastActivity = Date.now();
+        }
+
+        // Track user activity
+        ['click', 'keydown', 'mousemove', 'scroll', 'touchstart'].forEach(function(evt) {
+            document.addEventListener(evt, resetActivity, { passive: true });
+        });
+
+        // Countdown display
+        function updateBadge() {
+            var elapsed = Date.now() - lastActivity;
+            var remaining = Math.max(0, INACTIVITY_TIMEOUT - elapsed);
+            var mins = Math.floor(remaining / 60000);
+            var secs = Math.floor((remaining % 60000) / 1000);
+            badge.textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
+
+            if (remaining <= WARNING_THRESHOLD) {
+                badge.classList.add('warn');
+            } else {
+                badge.classList.remove('warn');
+            }
+
+            if (remaining <= 0) {
+                // Session expired — clear and show overlay
+                sessionStorage.removeItem(SESSION_KEY);
+                overlay.classList.add('visible');
+                document.body.style.overflow = 'hidden';
+                return;
+            }
+
+            requestAnimationFrame(updateBadge);
+        }
+        requestAnimationFrame(updateBadge);
+
+        // --- Copy protection ---
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('copy', function(e) { e.preventDefault(); });
         document.addEventListener('cut', function(e) { e.preventDefault(); });
@@ -191,6 +300,23 @@
             if ((e.ctrlKey || e.metaKey) && ['c','u','s','p'].indexOf(e.key.toLowerCase()) !== -1) { e.preventDefault(); }
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'i') { e.preventDefault(); }
             if (e.key === 'F12') { e.preventDefault(); }
+        });
+
+        // --- Prevent drag/drop of assets ---
+        document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+        // --- Logout ---
+        window.logout = function() {
+            sessionStorage.removeItem(SESSION_KEY);
+            window.location.replace('/publishing/login/');
+        };
+
+        // --- Block back-button cache access after logout ---
+        window.addEventListener('pageshow', function(e) {
+            if (e.persisted || !isAuthenticated()) {
+                sessionStorage.removeItem(SESSION_KEY);
+                window.location.replace('/publishing/login/');
+            }
         });
     })();
     </script>
