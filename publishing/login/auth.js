@@ -15,9 +15,9 @@
 
 const AUTH_CONFIG = {
     // Hashed username (default: "civicos")
-    USER_HASH: "66c92e06c0258143eb01e1eca10ad648753ab018b30e327b0e58f3b0ea536212",
+    USER_HASH: "2a96f9a78be0c8bb728431d148cf2c8edfe617237b8d72d0ccac55b31d053d51",
     // Hashed password (default: set below)
-    PASS_HASH: "e675595f347567b7b73ccb878526ced48fd08d0f44051d9932e993ae984c33be",
+    PASS_HASH: "faf3529fece1b1dd55ef39153f7889a0f484ff7ebbf3594ad089610959476bc9",
     // Session duration in ms (8 hours)
     SESSION_DURATION: 8 * 60 * 60 * 1000,
     // Session key
