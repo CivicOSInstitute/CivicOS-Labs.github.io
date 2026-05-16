@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>CivicOS Labs — Curriculum Access</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .login-box {
+            width: min(440px, 100%);
+            padding: 3rem 2.5rem;
+            border: 1px solid var(--line-strong);
+            background: var(--black-soft);
+        }
+        .login-box .section-label {
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .login-box h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .login-box .login-sub {
+            color: var(--ash);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ash);
+            margin-bottom: 0.4rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            background: var(--black);
+            border: 1px solid var(--line);
+            color: var(--paper);
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            border-color: var(--ember);
+        }
+        .form-group input::placeholder {
+            color: var(--ash);
+            opacity: 0.5;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--ember);
+            color: var(--paper);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.5rem;
+        }
+        .login-btn:hover {
+            background: var(--ember-deep);
+        }
+        .login-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .login-error {
+            color: var(--ember);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            display: none;
+            font-family: var(--mono);
+            letter-spacing: 0.02em;
+        }
+        .login-error.visible {
+            display: block;
+        }
+        .login-back {
+            display: block;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--ash);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-box">
+            <span class="section-label">CivicOS Labs / Restricted</span>
+            <h1>Curriculum Access</h1>
+            <p class="login-sub">Advanced deployment curriculum materials require authorized access. Enter your credentials to continue.</p>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" autocomplete="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="login-btn" id="loginBtn">Authenticate →</button>
+                <p class="login-error" id="loginError">Invalid credentials. Try again or contact info@civicoslabs.com.</p>
+            </form>
+            <a href="/" class="login-back">← Back to civicoslabs.com</a>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>CivicOS Labs — Curriculum Dashboard</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .dash-header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .dash-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .dash-header .section-label { margin: 0; }
+        .logout-btn {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ash);
+            background: none;
+            border: 1px solid var(--line);
+            padding: 0.4rem 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .logout-btn:hover {
+            color: var(--ember);
+            border-color: var(--ember);
+        }
+        .dash-hero {
+            padding: 3rem 0 2rem;
+        }
+        .dash-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .dash-hero p { max-width: 600px; }
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 0 4rem;
+        }
+        .curriculum-card {
+            border: 1px solid var(--line);
+            padding: 1.5rem;
+            background: var(--black-soft);
+            transition: border-color 0.2s;
+        }
+        .curriculum-card:hover {
+            border-color: var(--line-strong);
+        }
+        .curriculum-card .card-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        .curriculum-card .card-meta span {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ash);
+            padding: 0.2rem 0.5rem;
+            border: 1px solid var(--line);
+        }
+        .curriculum-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.4rem;
+        }
+        .curriculum-card p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .download-btn {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--paper);
+            background: var(--ember);
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .download-btn:hover {
+            background: var(--ember-deep);
+            color: var(--paper);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 4rem 0;
+            color: var(--ash);
+        }
+        .empty-state h3 { color: var(--ash); margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="dash-header">
+        <div class="container">
+            <span class="section-label">CivicOS Labs / Publishing / Curriculum</span>
+            <button class="logout-btn" onclick="logout()">Logout →</button>
+        </div>
+    </div>
+
+    <section class="dash-hero">
+        <div class="container">
+            <h1>Curriculum Dashboard</h1>
+            <p>Advanced deployment curriculum materials. Download available for authorized users only. Do not redistribute.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="curriculum-grid" id="curriculumGrid">
+                <!-- Curriculum cards injected by JS -->
+            </div>
+            <div class="empty-state" id="emptyState" style="display:none;">
+                <h3>No curriculum materials yet</h3>
+                <p>Materials will appear here as they are published.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="../login/auth.js"></script>
+    <script>
+        // Gate: redirect if not authenticated
+        if (!isAuthenticated()) {
+            window.location.replace('/publishing/login/');
+        }
+
+        const curriculum = [
+            // Add curriculum items here as PDFs are uploaded
+            // Example:
+            // {
+            //     title: "AI Literacy Workshop — Module 1",
+            //     description: "Foundations of local AI for community educators.",
+            //     tags: ["Workshop", "Module 1"],
+            //     file: "/publishing/assets/ai-literacy-module-1.pdf"
+            // },
+        ];
+
+        function renderCurriculum() {
+            const grid = document.getElementById('curriculumGrid');
+            const empty = document.getElementById('emptyState');
+
+            if (curriculum.length === 0) {
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            grid.innerHTML = curriculum.map(item => `
+                <div class="curriculum-card">
+                    <div class="card-meta">
+                        ${item.tags.map(t => `<span>${t}</span>`).join('')}
+                    </div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <a href="${item.file}" class="download-btn" download>Download PDF ↓</a>
+                </div>
+            `).join('');
+        }
+
+        renderCurriculum();
+    </script>
+</body>
+</html>
