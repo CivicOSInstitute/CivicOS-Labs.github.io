@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="content='noindex, nofollow">
     <title>CivicOS Labs — Curriculum Access</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/style.css">
@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Disable all text selection and copy */
+        /* Block all selection/copy globally */
         * {
             -webkit-user-select: none !important;
             -moz-user-select: none !important;
@@ -19,27 +19,59 @@
             user-select: none !important;
             -webkit-touch-callout: none !important;
         }
-        .dash-header {
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--line);
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: var(--black);
         }
-        .dash-header .container {
+
+        .viewer-header {
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
+            padding: 0 1.25rem;
+            border-bottom: 1px solid var(--line);
+            background: var(--black-soft);
+            flex-shrink: 0;
+        }
+
+        .viewer-header .header-left {
+            display: flex;
+            align-items: center;
             gap: 1rem;
         }
-        .dash-header .section-label { margin: 0; }
+
+        .viewer-header .section-label {
+            margin: 0;
+            font-size: 0.7rem;
+        }
+
+        .viewer-header .doc-title {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--paper);
+            font-weight: 500;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
         .logout-btn {
             font-family: var(--mono);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--ash);
             background: none;
             border: 1px solid var(--line);
-            padding: 0.4rem 0.9rem;
+            padding: 0.3rem 0.75rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -47,77 +79,55 @@
             color: var(--ember);
             border-color: var(--ember);
         }
-        .resource-section {
-            padding: 3rem 0;
-        }
-        .resource-hero {
-            margin-bottom: 2.5rem;
-        }
-        .resource-hero h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        .resource-hero p {
-            max-width: 640px;
-        }
-        .resource-card {
-            border: 1px solid var(--line-strong);
-            background: var(--black-soft);
-            padding: 2rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        .resource-card .resource-icon {
-            flex-shrink: 0;
-            width: 80px;
-            height: 100px;
-            background: var(--black);
-            border: 1px solid var(--line);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--mono);
-            font-size: 0.7rem;
-            letter-spacing: 0.05em;
-            color: var(--ember);
-            text-transform: uppercase;
-        }
-        .resource-card .resource-info {
-            flex: 1;
-            min-width: 240px;
-        }
-        .resource-card .resource-info .card-meta {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-        }
-        .resource-card .resource-info .card-meta span {
+
+        .watermark-notice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.85);
+            color: var(--ash);
             font-family: var(--mono);
             font-size: 0.65rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--ash);
-            padding: 0.2rem 0.5rem;
-            border: 1px solid var(--line);
+            letter-spacing: 0.04em;
+            text-align: center;
+            padding: 0.4rem 1rem;
+            z-index: 100;
+            border-top: 1px solid var(--line);
         }
-        .resource-card h3 {
+
+        .pdf-frame {
+            width: 100%;
+            height: calc(100vh - 48px);
+            border: none;
+            display: block;
+        }
+
+        /* Fallback message for browsers that can't embed PDFs */
+        .fallback-download {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 48px);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .fallback-download h2 {
+            color: var(--paper);
             font-size: 1.3rem;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.75rem;
         }
-        .resource-card .resource-desc {
+
+        .fallback-download p {
+            color: var(--ash);
             font-size: 0.9rem;
-            margin-bottom: 1.25rem;
+            max-width: 480px;
+            margin-bottom: 1.5rem;
             line-height: 1.6;
         }
-        .resource-card .file-info {
-            font-family: var(--mono);
-            font-size: 0.7rem;
-            color: var(--ash);
-            margin-bottom: 1.25rem;
-            letter-spacing: 0.04em;
-        }
+
         .download-btn {
             display: inline-block;
             font-family: var(--mono);
@@ -130,58 +140,53 @@
             text-decoration: none;
             transition: background 0.2s;
             border: none;
+            cursor: pointer;
         }
         .download-btn:hover {
             background: var(--ember-deep);
             color: var(--paper);
         }
-        .notice {
-            margin-top: 2rem;
-            padding: 1rem 1.25rem;
-            border: 1px solid var(--line);
-            font-size: 0.8rem;
-            color: var(--ash);
-            line-height: 1.6;
-            font-family: var(--mono);
-            letter-spacing: 0.02em;
+
+        /* Print-blocking */
+        @media print {
+            body { display: none !important; }
+            html::after {
+                content: "Printing is disabled for this document.";
+                display: block;
+                padding: 2rem;
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="dash-header">
-        <div class="container">
-            <span class="section-label">CivicOS Labs / Publishing / Curriculum</span>
+    <div class="viewer-header">
+        <div class="header-left">
+            <span class="section-label">CivicOS Labs / Publishing</span>
+            <span class="doc-title">The Open Source Student — FL Educator Edition v1.0</span>
+        </div>
+        <div class="header-actions">
             <button class="logout-btn" onclick="logout()">Logout →</button>
         </div>
     </div>
 
-    <section class="resource-section">
-        <div class="container">
-            <div class="resource-hero">
-                <h1>Curriculum Materials</h1>
-                <p>Authorized access only. Materials are provided for deployment use and may not be redistributed or reproduced without written permission from CivicOS Labs.</p>
-            </div>
+    <!-- PDF embedded viewer -->
+    <iframe id="pdfViewer"
+            class="pdf-frame"
+            src="/publishing/assets/The_Open_Source_Student_FL_Educator_Edition_v1_0.pdf#toolbar=0&navpanes=0&scrollbar=1"
+            frameborder="0">
+    </iframe>
 
-            <div class="resource-card">
-                <div class="resource-icon">PDF</div>
-                <div class="resource-info">
-                    <div class="card-meta">
-                        <span>Curriculum</span>
-                        <span>FL Educator Edition</span>
-                        <span>v1.0</span>
-                    </div>
-                    <h3>The Open Source Student — Florida Educator Edition</h3>
-                    <p class="resource-desc">A comprehensive guide for Florida educators to teach students and families how to install local AI, build practical assistants, and develop AI literacy without surrendering data. Designed for classroom and community deployment.</p>
-                    <div class="file-info">PDF · ~2 MB · The_Open_Source_Student_FL_Educator_Edition_v1_0.pdf</div>
-                    <a href="/publishing/assets/The_Open_Source_Student_FL_Educator_Edition_v1_0.pdf" class="download-btn" download>Download PDF ↓</a>
-                </div>
-            </div>
+    <!-- Fallback for browsers without PDF embedding -->
+    <div id="fallback" class="fallback-download">
+        <h2>Curriculum Access</h2>
+        <p>Your browser doesn't support embedded PDF viewing. Download the document below.</p>
+        <a href="/publishing/assets/The_Open_Source_Student_FL_Educator_Edition_v1_0.pdf" class="download-btn">Download PDF ↓</a>
+    </div>
 
-            <div class="notice">
-                ⚠ This content is licensed for authorized deployment use only. Unauthorized copying, distribution, or reproduction is prohibited. Contact info@civicoslabs.com for licensing inquiries.
-            </div>
-        </div>
-    </section>
+    <div class="watermark-notice">
+        ⚠ Licensed for authorized deployment use only · Unauthorized copying, distribution, or reproduction is prohibited · Contact info@civicoslabs.com
+    </div>
 
     <script src="login/auth.js"></script>
     <script>
@@ -190,16 +195,55 @@
             window.location.replace('/publishing/login/');
         }
 
-        // Block copy/paste/right-click/keyboard shortcuts
+        // === Copy/print/save protection ===
+
+        // Block right-click
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+        // Block copy/cut/select
         document.addEventListener('copy', function(e) { e.preventDefault(); });
         document.addEventListener('cut', function(e) { e.preventDefault(); });
         document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+
+        // Block keyboard shortcuts: Ctrl+C, Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+Shift+I/C/J, F12
         document.addEventListener('keydown', function(e) {
-            // Block Ctrl+C, Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+Shift+I, F12
-            if ((e.ctrlKey || e.metaKey) && ['c','u','s','p'].includes(e.key.toLowerCase())) { e.preventDefault(); }
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'i') { e.preventDefault(); }
+            if ((e.ctrlKey || e.metaKey) && ['c','u','s','p','a'].includes(e.key.toLowerCase())) {
+                e.preventDefault();
+            }
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','c','j'].includes(e.key.toLowerCase())) {
+                e.preventDefault();
+            }
             if (e.key === 'F12') { e.preventDefault(); }
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') { e.preventDefault(); }
+        });
+
+        // Block drag
+        document.addEventListener('dragstart', function(e) { e.preventDefault(); });
+
+        // CSS-based print blocking
+        var printStyle = document.createElement('style');
+        printStyle.textContent = '@media print { body { display: none !important; } }';
+        document.head.appendChild(printStyle);
+
+        // Detect PDF embed support
+        var iframe = document.getElementById('pdfViewer');
+        var fallback = document.getElementById('fallback');
+
+        iframe.onload = function() {
+            // If the iframe loaded something, keep it visible
+            iframe.style.display = 'block';
+            fallback.style.display = 'none';
+        };
+
+        iframe.onerror = function() {
+            iframe.style.display = 'none';
+            fallback.style.display = 'flex';
+        };
+
+        // Also intercept beforeprint
+        window.addEventListener('beforeprint', function(e) {
+            // Show a blank page when printing is attempted
+            document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;color:#666;font-family:monospace;">Printing is disabled for this document.</div>';
         });
     </script>
 </body>
