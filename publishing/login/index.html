@@ -115,7 +115,7 @@
             <span class="section-label">CivicOS Labs / Restricted</span>
             <h1>Curriculum Access</h1>
             <p class="login-sub">Advanced deployment curriculum materials require authorized access. Enter your credentials to continue.</p>
-            <form id="loginForm" onsubmit="return handleLogin(event)">
+            <form id="loginForm">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" placeholder="Enter username" autocomplete="username" required>
@@ -131,6 +131,63 @@
         </div>
     </div>
 
-    <script src="auth.js"></script>
+    <script>
+    // Inline auth — no external dependency to avoid load failures
+    (function() {
+        var AUTH_CONFIG = {
+            USER_HASH: "2a96f9a78be0c8bb728431d148cf2c8edfe617237b8d72d0ccac55b31d053d51",
+            PASS_HASH: "faf3529fece1b1dd55ef39153f7889a0f484ff7ebbf3594ad089610959476bc9",
+            SESSION_DURATION: 8 * 60 * 60 * 1000,
+            SESSION_KEY: 'civicos_pub_auth'
+        };
+
+        function sha256(message) {
+            var msgBuffer = new TextEncoder().encode(message);
+            return crypto.subtle.digest('SHA-256', msgBuffer).then(function(hashBuffer) {
+                var hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+            });
+        }
+
+        var form = document.getElementById('loginForm');
+        var btn = document.getElementById('loginBtn');
+        var errorEl = document.getElementById('loginError');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var username = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value;
+
+            errorEl.classList.remove('visible');
+            btn.disabled = true;
+            btn.textContent = 'Verifying…';
+
+            Promise.all([sha256(username), sha256(password)]).then(function(hashes) {
+                var userHash = hashes[0];
+                var passHash = hashes[1];
+
+                if (userHash === AUTH_CONFIG.USER_HASH && passHash === AUTH_CONFIG.PASS_HASH) {
+                    var session = {
+                        user: username,
+                        ts: Date.now(),
+                        token: (crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substr(2))
+                    };
+                    sessionStorage.setItem(AUTH_CONFIG.SESSION_KEY, JSON.stringify(session));
+                    window.location.href = '/publishing/';
+                } else {
+                    errorEl.classList.add('visible');
+                    btn.disabled = false;
+                    btn.textContent = 'Authenticate →';
+                }
+            }).catch(function(err) {
+                errorEl.textContent = 'Authentication error. Please try again.';
+                errorEl.classList.add('visible');
+                btn.disabled = false;
+                btn.textContent = 'Authenticate →';
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
