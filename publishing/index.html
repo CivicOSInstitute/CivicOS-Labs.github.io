@@ -2,48 +2,292 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="robots" content="noindex, nofollow">
-    <title>CivicOS Labs — Publishing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicOS Labs — The Open Source Student — Florida Pilot Kit</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/style.css">
     <style>
-        .gate-wrapper {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
+        .hero-publishing {
+            padding: 3rem 0 2rem;
         }
-        .gate-box {
-            width: min(440px, 100%);
-            padding: 3rem 2.5rem;
-            border: 1px solid var(--line-strong);
-            background: var(--black-soft);
-            text-align: center;
-        }
-        .gate-box h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .gate-box p { color: var(--ash); margin-bottom: 1.5rem; }
-        .gate-box a {
+        .hero-publishing h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+        .hero-publishing .subtitle { color: var(--ash); font-size: 1.05rem; margin-bottom: 1rem; }
+        .badge {
             display: inline-block;
             font-family: var(--mono);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border: 1px solid var(--line);
+            color: var(--ash);
+        }
+        .badge-free { border-color: #2e7d32; color: #4caf50; }
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+        .audience-card {
+            border: 1px solid var(--line);
+            padding: 1.5rem;
+            background: var(--black-soft);
+            transition: border-color 0.15s;
+        }
+        .audience-card:hover { border-color: var(--line-strong); }
+        .audience-card .card-label {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ash);
+            margin-bottom: 0.5rem;
+        }
+        .audience-card h3 { font-size: 1.1rem; margin-bottom: 0.35rem; }
+        .audience-card p { font-size: 0.88rem; color: var(--ash); margin-bottom: 1rem; line-height: 1.5; }
+        .audience-card .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem 0;
+            font-size: 0.82rem;
+            border-top: 1px solid var(--line);
+            padding-top: 0.75rem;
+        }
+        .audience-card .file-list li {
+            padding: 0.2rem 0;
+            border-bottom: 1px solid var(--line-faint);
+        }
+        .audience-card .file-list a {
+            color: var(--paper);
+            text-decoration: none;
+        }
+        .audience-card .file-list a:hover { text-decoration: underline; }
+        .audience-card .file-list .pages {
+            color: var(--ash);
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            float: right;
+        }
+        .dl-btn {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
             color: var(--paper);
             background: var(--ember);
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1rem;
             text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .dl-btn:hover { opacity: 0.9; }
+        .dl-btn-secondary {
+            background: transparent;
+            border: 1px solid var(--line-strong);
+            color: var(--ash);
+        }
+        .zip-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border: 1px solid var(--ember);
+            background: rgba(198, 63, 30, 0.06);
+        }
+        .zip-section h3 { margin-bottom: 0.25rem; }
+        .zip-section p { color: var(--ash); font-size: 0.9rem; margin-bottom: 1rem; }
+        .meta-row {
+            display: flex;
+            gap: 1.5rem;
+            margin: 0.5rem 0;
+            font-size: 0.82rem;
+            color: var(--ash);
+        }
+        .meta-row strong { color: var(--paper); }
+        .note-box {
+            margin: 1.5rem 0;
+            padding: 1rem 1.25rem;
+            border-left: 3px solid var(--line-strong);
+            font-size: 0.85rem;
+            color: var(--ash);
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
-    <div class="gate-wrapper">
-        <div class="gate-box">
-            <span class="section-label">CivicOS Labs / Publishing</span>
-            <h1>Access Restricted</h1>
-            <p>Curriculum materials have moved to a secure environment. Contact info@civicoslabs.com for access.</p>
-            <a href="/">← Back to civicoslabs.com</a>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo" aria-label="CivicOS Labs home">CL</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/ebook/">Ebook</a>
+                <a href="#projects">Projects</a>
+                <a href="/governance/">Governance</a>
+                <a href="/publishing/">Publishing</a>
+                <a href="mailto:info@civicoslabs.com?subject=CivicOS%20Labs%20inquiry">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container hero-publishing">
+        <span class="section-label">CivicOS Labs / Publishing / Florida Pilot Kit</span>
+        <h1>The Open Source Student — Florida Educator's Edition</h1>
+        <p class="subtitle">Pilot Kit v1.0 · Free during pilot · Five lessons · No installations required</p>
+        <div class="meta-row">
+            <span><strong>License:</strong> CC BY-NC-SA 4.0</span>
+            <span><strong>Publisher:</strong> CivicOS Labs, LLC</span>
+            <span><strong>Standards:</strong> FL B.E.S.T. (verified 2026-05-17)</span>
         </div>
     </div>
+
+    <hr class="section-divider">
+
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <p class="section-label">Download your packet</p>
+                <h2>Choose your audience — each packet is tailored.</h2>
+                <p>Each folder contains the documents most relevant to your role. Start with the READ ME FIRST file in your packet.</p>
+            </div>
+
+            <div class="audience-grid">
+
+                <div class="audience-card">
+                    <div class="card-label">Audience 01</div>
+                    <h3>Public Schools — Principals &amp; Districts</h3>
+                    <p>Administrator decision packet, standards and pacing, implementation readiness, pricing, Google Classroom pack, and pilot agreement.</p>
+                    <ul class="file-list">
+                        <li><a href="downloads/01_Public_Schools_Principals_and_Districts/Administrator_Decision_Packet.pdf">Administrator Decision Packet</a> <span class="pages">12 pp</span></li>
+                        <li><a href="downloads/01_Public_Schools_Principals_and_Districts/Standards_Pacing_and_Course_Fit.pdf">Standards, Pacing &amp; Course Fit</a> <span class="pages">18 pp</span></li>
+                        <li><a href="downloads/01_Public_Schools_Principals_and_Districts/Implementation_Readiness_Packet.pdf">Implementation Readiness Packet</a> <span class="pages">28 pp</span></li>
+                        <li><a href="downloads/01_Public_Schools_Principals_and_Districts/Institutional_Pricing_Information.pdf">Institutional Pricing Information</a> <span class="pages">5 pp</span></li>
+                        <li><a href="downloads/01_Public_Schools_Principals_and_Districts/Open_Pilot_Agreement.pdf">Open Pilot Agreement</a> <span class="pages">6 pp</span></li>
+                        <li><a href="downloads/01_Public_Schools_Principals_and_Districts/Google_Classroom_Upload_Pack.pdf">Google Classroom Upload Pack</a> <span class="pages">17 pp</span></li>
+                    </ul>
+                    <a href="downloads/01_Public_Schools_Principals_and_Districts/00_READ_ME_FIRST_Public_Schools_Principals_and_Districts.pdf" class="dl-btn">Read Me First →</a>
+                </div>
+
+                <div class="audience-card">
+                    <div class="card-label">Audience 02</div>
+                    <h3>Private Schools</h3>
+                    <p>Administrator decision packet, teacher and student lesson packs, implementation readiness, pricing, and pilot agreement.</p>
+                    <ul class="file-list">
+                        <li><a href="downloads/02_Private_Schools/Administrator_Decision_Packet.pdf">Administrator Decision Packet</a> <span class="pages">12 pp</span></li>
+                        <li><a href="downloads/02_Private_Schools/Teacher_Edition_Lesson_Pack.pdf">Teacher Edition Lesson Pack</a> <span class="pages">77 pp</span></li>
+                        <li><a href="downloads/02_Private_Schools/Student_Edition_Lesson_Pack.pdf">Student Edition Lesson Pack</a> <span class="pages">38 pp</span></li>
+                        <li><a href="downloads/02_Private_Schools/Implementation_Readiness_Packet.pdf">Implementation Readiness Packet</a> <span class="pages">28 pp</span></li>
+                        <li><a href="downloads/02_Private_Schools/Institutional_Pricing_Information.pdf">Institutional Pricing Information</a> <span class="pages">5 pp</span></li>
+                        <li><a href="downloads/02_Private_Schools/Open_Pilot_Agreement.pdf">Open Pilot Agreement</a> <span class="pages">6 pp</span></li>
+                    </ul>
+                    <a href="downloads/02_Private_Schools/00_READ_ME_FIRST_Private_Schools.pdf" class="dl-btn">Read Me First →</a>
+                </div>
+
+                <div class="audience-card">
+                    <div class="card-label">Audience 03</div>
+                    <h3>Microschools &amp; Co-Ops</h3>
+                    <p>Teacher and student lesson packs, ESA and reimbursement packet, implementation readiness, pricing, and pilot agreement.</p>
+                    <ul class="file-list">
+                        <li><a href="downloads/03_Microschools_and_Co_Ops/Teacher_Edition_Lesson_Pack.pdf">Teacher Edition Lesson Pack</a> <span class="pages">77 pp</span></li>
+                        <li><a href="downloads/03_Microschools_and_Co_Ops/Student_Edition_Lesson_Pack.pdf">Student Edition Lesson Pack</a> <span class="pages">38 pp</span></li>
+                        <li><a href="downloads/03_Microschools_and_Co_Ops/ESA_and_Reimbursement_Packet.pdf">ESA &amp; Reimbursement Packet</a> <span class="pages">42 pp</span></li>
+                        <li><a href="downloads/03_Microschools_and_Co_Ops/Implementation_Readiness_Packet.pdf">Implementation Readiness Packet</a> <span class="pages">28 pp</span></li>
+                        <li><a href="downloads/03_Microschools_and_Co_Ops/Institutional_Pricing_Information.pdf">Institutional Pricing Information</a> <span class="pages">5 pp</span></li>
+                        <li><a href="downloads/03_Microschools_and_Co_Ops/Open_Pilot_Agreement.pdf">Open Pilot Agreement</a> <span class="pages">6 pp</span></li>
+                    </ul>
+                    <a href="downloads/03_Microschools_and_Co_Ops/00_READ_ME_FIRST_Microschools_and_Co_Ops.pdf" class="dl-btn">Read Me First →</a>
+                </div>
+
+                <div class="audience-card">
+                    <div class="card-label">Audience 04</div>
+                    <h3>Homeschool &amp; ESA Families</h3>
+                    <p>Student lesson pack, ESA and reimbursement packet, implementation readiness, pricing, and pilot agreement.</p>
+                    <ul class="file-list">
+                        <li><a href="downloads/04_Homeschool_and_ESA_Families/Student_Edition_Lesson_Pack.pdf">Student Edition Lesson Pack</a> <span class="pages">38 pp</span></li>
+                        <li><a href="downloads/04_Homeschool_and_ESA_Families/ESA_and_Reimbursement_Packet.pdf">ESA &amp; Reimbursement Packet</a> <span class="pages">42 pp</span></li>
+                        <li><a href="downloads/04_Homeschool_and_ESA_Families/Implementation_Readiness_Packet.pdf">Implementation Readiness Packet</a> <span class="pages">28 pp</span></li>
+                        <li><a href="downloads/04_Homeschool_and_ESA_Families/Institutional_Pricing_Information.pdf">Institutional Pricing Information</a> <span class="pages">5 pp</span></li>
+                        <li><a href="downloads/04_Homeschool_and_ESA_Families/Open_Pilot_Agreement.pdf">Open Pilot Agreement</a> <span class="pages">6 pp</span></li>
+                    </ul>
+                    <a href="downloads/04_Homeschool_and_ESA_Families/00_READ_ME_FIRST_Homeschool_and_ESA_Families.pdf" class="dl-btn">Read Me First →</a>
+                </div>
+
+                <div class="audience-card">
+                    <div class="card-label">Audience 05</div>
+                    <h3>Summer Camps</h3>
+                    <p>Standards and pacing, teacher and student lesson packs, implementation readiness, pricing, and pilot agreement.</p>
+                    <ul class="file-list">
+                        <li><a href="downloads/05_Summer_Camps/Standards_Pacing_and_Course_Fit.pdf">Standards, Pacing &amp; Course Fit</a> <span class="pages">18 pp</span></li>
+                        <li><a href="downloads/05_Summer_Camps/Teacher_Edition_Lesson_Pack.pdf">Teacher Edition Lesson Pack</a> <span class="pages">77 pp</span></li>
+                        <li><a href="downloads/05_Summer_Camps/Student_Edition_Lesson_Pack.pdf">Student Edition Lesson Pack</a> <span class="pages">38 pp</span></li>
+                        <li><a href="downloads/05_Summer_Camps/Implementation_Readiness_Packet.pdf">Implementation Readiness Packet</a> <span class="pages">28 pp</span></li>
+                        <li><a href="downloads/05_Summer_Camps/Institutional_Pricing_Information.pdf">Institutional Pricing Information</a> <span class="pages">5 pp</span></li>
+                        <li><a href="downloads/05_Summer_Camps/Open_Pilot_Agreement.pdf">Open Pilot Agreement</a> <span class="pages">6 pp</span></li>
+                    </ul>
+                    <a href="downloads/05_Summer_Camps/00_READ_ME_FIRST_Summer_Camps.pdf" class="dl-btn">Read Me First →</a>
+                </div>
+
+                <div class="audience-card">
+                    <div class="card-label">Audience 06</div>
+                    <h3>After-School &amp; Library Programs</h3>
+                    <p>Standards and pacing, teacher and student lesson packs, pilot recruitment pack, implementation readiness, and pricing.</p>
+                    <ul class="file-list">
+                        <li><a href="downloads/06_After_School_and_Library_Programs/Standards_Pacing_and_Course_Fit.pdf">Standards, Pacing &amp; Course Fit</a> <span class="pages">18 pp</span></li>
+                        <li><a href="downloads/06_After_School_and_Library_Programs/Teacher_Edition_Lesson_Pack.pdf">Teacher Edition Lesson Pack</a> <span class="pages">77 pp</span></li>
+                        <li><a href="downloads/06_After_School_and_Library_Programs/Student_Edition_Lesson_Pack.pdf">Student Edition Lesson Pack</a> <span class="pages">38 pp</span></li>
+                        <li><a href="downloads/06_After_School_and_Library_Programs/Pilot_Recruitment_and_Feedback_Pack.pdf">Pilot Recruitment &amp; Feedback Pack</a> <span class="pages">20 pp</span></li>
+                        <li><a href="downloads/06_After_School_and_Library_Programs/Implementation_Readiness_Packet.pdf">Implementation Readiness Packet</a> <span class="pages">28 pp</span></li>
+                        <li><a href="downloads/06_After_School_and_Library_Programs/Institutional_Pricing_Information.pdf">Institutional Pricing Information</a> <span class="pages">5 pp</span></li>
+                    </ul>
+                    <a href="downloads/06_After_School_and_Library_Programs/00_READ_ME_FIRST_After_School_and_Library_Programs.pdf" class="dl-btn">Read Me First →</a>
+                </div>
+
+                <div class="audience-card">
+                    <div class="card-label">Audience 07</div>
+                    <h3>Teachers &amp; Facilitators</h3>
+                    <p>Teacher and student lesson packs, assessment/differentiation/appendices, Google Classroom pack, and implementation readiness.</p>
+                    <ul class="file-list">
+                        <li><a href="downloads/07_Teachers_and_Facilitators/Teacher_Edition_Lesson_Pack.pdf">Teacher Edition Lesson Pack</a> <span class="pages">77 pp</span></li>
+                        <li><a href="downloads/07_Teachers_and_Facilitators/Student_Edition_Lesson_Pack.pdf">Student Edition Lesson Pack</a> <span class="pages">38 pp</span></li>
+                        <li><a href="downloads/07_Teachers_and_Facilitators/Assessment_Differentiation_and_Appendices.pdf">Assessment, Differentiation &amp; Appendices</a> <span class="pages">40 pp</span></li>
+                        <li><a href="downloads/07_Teachers_and_Facilitators/Google_Classroom_Upload_Pack.pdf">Google Classroom Upload Pack</a> <span class="pages">17 pp</span></li>
+                        <li><a href="downloads/07_Teachers_and_Facilitators/Implementation_Readiness_Packet.pdf">Implementation Readiness Packet</a> <span class="pages">28 pp</span></li>
+                    </ul>
+                    <a href="downloads/07_Teachers_and_Facilitators/00_READ_ME_FIRST_Teachers_and_Facilitators.pdf" class="dl-btn">Read Me First →</a>
+                </div>
+
+                <div class="audience-card">
+                    <div class="card-label">Audience 08</div>
+                    <h3>IT &amp; Implementation Admin</h3>
+                    <p>Implementation readiness, Google Classroom pack, pilot agreement, and institutional pricing for IT review and sign-off.</p>
+                    <ul class="file-list">
+                        <li><a href="downloads/08_IT_and_Implementation_Admin/Implementation_Readiness_Packet.pdf">Implementation Readiness Packet</a> <span class="pages">28 pp</span></li>
+                        <li><a href="downloads/08_IT_and_Implementation_Admin/Google_Classroom_Upload_Pack.pdf">Google Classroom Upload Pack</a> <span class="pages">17 pp</span></li>
+                        <li><a href="downloads/08_IT_and_Implementation_Admin/Open_Pilot_Agreement.pdf">Open Pilot Agreement</a> <span class="pages">6 pp</span></li>
+                        <li><a href="downloads/08_IT_and_Implementation_Admin/Institutional_Pricing_Information.pdf">Institutional Pricing Information</a> <span class="pages">5 pp</span></li>
+                    </ul>
+                    <a href="downloads/08_IT_and_Implementation_Admin/00_READ_ME_FIRST_IT_and_Implementation_Admin.pdf" class="dl-btn">Read Me First →</a>
+                </div>
+
+            </div>
+
+            <div class="zip-section">
+                <h3>Download Everything</h3>
+                <p>Complete audience distribution ZIP — all 9 audience packets, full preview archive, and distribution manifest (65 files, ~20 MB).</p>
+                <a href="downloads/OSS_FL_PilotKit_Split_Downloads.zip" class="dl-btn">Download Complete ZIP ↓</a>
+            </div>
+
+            <div class="note-box">
+                <strong>Full Preview Packet.</strong> A single 165-page archive copy of the complete curriculum is available inside the ZIP at <code>10_Full_Preview_Packet_Optional/</code>. This is provided for evaluators who want to see everything in one document. For classroom use, use the audience-specific packets above.
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <p>&copy; 2026 CivicOS Labs, LLC. The Open Source Student — Florida Pilot Kit is licensed CC BY-NC-SA 4.0.</p>
+            <p><a href="/">civicoslabs.com</a> · <a href="mailto:info@civicoslabs.com?subject=Florida%20Pilot%20Kit%20inquiry">Contact</a> · <a href="/governance/">Governance</a></p>
+        </div>
+    </footer>
 </body>
 </html>
