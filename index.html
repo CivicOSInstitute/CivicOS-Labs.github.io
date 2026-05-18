@@ -211,6 +211,68 @@
             line-height: 1.7;
             color: var(--paper-dim);
         }
+
+        /* PRIS expandable panel */
+        #pris-card {
+            overflow: visible;
+        }
+        .pris-panel {
+            display: none;
+            margin-top: 20px;
+            border-top: 1px solid var(--line-strong);
+            padding-top: 20px;
+        }
+        .pris-panel-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+        .pris-brief p:not(.section-label) {
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--paper-dim);
+            margin-bottom: 16px;
+        }
+        .pris-details {
+            margin-top: 16px;
+        }
+        .pris-detail-row {
+            display: grid;
+            grid-template-columns: 90px 1fr;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.85rem;
+        }
+        .pris-detail-row:first-child {
+            border-top: 1px solid var(--line);
+        }
+        .pris-detail-row span {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--ash);
+        }
+        .pris-detail-row strong {
+            color: var(--paper);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        .pris-form-wrap {
+            border: 1px solid var(--line);
+            padding: 24px;
+            background: rgba(243, 234, 220, 0.02);
+        }
+        @media (max-width: 860px) {
+            .pris-panel-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+        #pris-card.pris-expanded {
+            grid-column: 1 / -1;
+        }
     </style>
 </head>
 <body>
@@ -419,11 +481,89 @@
                     <p>A public specification track for civic data interoperability, transparent workflows, and reusable public-interest infrastructure.</p>
                     <a href="https://github.com/CivicOSInstitute/open-civic-specs" class="link-arrow" target="_blank" rel="noopener">View GitHub</a>
                 </article>
-                <article class="card project-card">
+                <article class="card project-card" id="pris-card">
                     <div class="project-meta"><span>Prototype</span><span>Records</span></div>
                     <h3>Public Records Intelligence Stack</h3>
                     <p>Early-stage tooling for request tracking, jurisdiction comparison, response analysis, and publication of reusable civic datasets.</p>
-                    <a href="mailto:info@civicoslabs.com?subject=Public%20Records%20Intelligence%20Stack" class="link-arrow">Discuss pilot</a>
+                    <a href="#pris-panel" class="link-arrow" id="pris-toggle" onclick="event.preventDefault();var panel=document.getElementById('pris-panel');var card=document.getElementById('pris-card');if(panel.style.display==='none'||!panel.style.display){panel.style.display='block';card.classList.add('pris-expanded');}else{panel.style.display='none';card.classList.remove('pris-expanded');}">Discuss pilot</a>
+
+                    <!-- Expandable PRIS Info Card + Form -->
+                    <div class="pris-panel" id="pris-panel">
+                        <div class="pris-panel-inner">
+                            <div class="pris-brief">
+                                <p class="section-label" style="margin-bottom:10px;">Public Records Intelligence Stack</p>
+                                <h4 style="font-size:1.15rem;margin-bottom:10px;">Pilot Overview</h4>
+                                <p>PRIS is a prototype toolkit for public records workflows — FOIA tracking, jurisdiction comparison, response analysis, and structured dataset publication. We're looking for pilot partners in journalism, legal aid, civic tech, and government transparency.</p>
+                                <div class="pris-details">
+                                    <div class="pris-detail-row">
+                                        <span>Status</span>
+                                        <strong>Early prototype · seeking pilot partners</strong>
+                                    </div>
+                                    <div class="pris-detail-row">
+                                        <span>Use cases</span>
+                                        <strong>FOIA request tracking, jurisdiction comparison, response analysis, dataset publication</strong>
+                                    </div>
+                                    <div class="pris-detail-row">
+                                        <span>Who it's for</span>
+                                        <strong>Journalists, legal aid orgs, civic technologists, transparency advocates, researchers</strong>
+                                    </div>
+                                    <div class="pris-detail-row">
+                                        <span>Stack</span>
+                                        <strong>Open-source · self-hostable · API-first · structured public data</strong>
+                                    </div>
+                                    <div class="pris-detail-row">
+                                        <span>License</span>
+                                        <strong>Open (public-interest)</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pris-form-wrap">
+                                <p class="section-label" style="margin-bottom:10px;">Express interest</p>
+                                <form id="pris-form" action="https://formspree.io/f/xaqlrnbj" method="POST">
+                                    <div class="form-group">
+                                        <label for="pris-name">Name</label>
+                                        <input type="text" id="pris-name" name="name" required placeholder="Your name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pris-email">Email</label>
+                                        <input type="email" id="pris-email" name="email" required placeholder="you@organization.org">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pris-org">Organization</label>
+                                        <input type="text" id="pris-org" name="organization" placeholder="Newsroom, nonprofit, agency...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pris-role">I work in...</label>
+                                        <select id="pris-role" name="sector">
+                                            <option value="">Select your sector</option>
+                                            <option value="Journalism / Media">Journalism / Media</option>
+                                            <option value="Legal aid / Civil liberties">Legal aid / Civil liberties</option>
+                                            <option value="Civic technology">Civic technology</option>
+                                            <option value="Government / Public sector">Government / Public sector</option>
+                                            <option value="Academic / Research">Academic / Research</option>
+                                            <option value="Transparency / Watchdog">Transparency / Watchdog</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pris-message">What are you looking for?</label>
+                                        <textarea id="pris-message" name="message" placeholder="Tell us about your public records workflow, what's missing, or what you'd want from a pilot..."></textarea>
+                                    </div>
+                                    <input type="hidden" name="_subject" value="PRIS Pilot Inquiry from civicoslabs.com">
+                                    <input type="hidden" name="_form_id" value="pris-pilot-inquiry">
+                                    <button type="submit" class="form-submit" id="pris-submit-btn">
+                                        Request Pilot Info
+                                        <span class="form-spinner" id="pris-spinner">&#8987;</span>
+                                    </button>
+                                    <div class="form-error" id="pris-error"></div>
+                                </form>
+                                <div class="form-success" id="pris-success">
+                                    <h3>Thanks for your interest.</h3>
+                                    <p>We'll reach out with pilot details. Questions in the meantime? <a href="mailto:info@civicoslabs.com?subject=PRIS%20Pilot">Email us</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </article>
             </div>
         </div>
@@ -504,6 +644,48 @@
                 spinner.style.display = 'none';
             }
         });
+
+        // PRIS form handler
+        const prisForm = document.getElementById('pris-form');
+        const prisBtn = document.getElementById('pris-submit-btn');
+        const prisSpinner = document.getElementById('pris-spinner');
+        const prisError = document.getElementById('pris-error');
+        const prisSuccess = document.getElementById('pris-success');
+
+        if (prisForm) {
+            prisForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                prisBtn.disabled = true;
+                prisSpinner.style.display = 'inline';
+                prisError.style.display = 'none';
+
+                const data = new FormData(prisForm);
+                const plainData = {};
+                data.forEach((v, k) => { plainData[k] = v; });
+
+                try {
+                    const res = await fetch(prisForm.action, {
+                        method: 'POST',
+                        body: JSON.stringify(plainData),
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    });
+                    if (res.ok) {
+                        prisForm.style.display = 'none';
+                        prisSuccess.style.display = 'block';
+                    } else {
+                        throw new Error('Server error');
+                    }
+                } catch (err) {
+                    prisError.textContent = 'Something went wrong. Please email us directly at info@civicoslabs.com.';
+                    prisError.style.display = 'block';
+                    prisBtn.disabled = false;
+                    prisSpinner.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
