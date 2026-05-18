@@ -504,6 +504,63 @@
         </div>
     </section>
 
+    <!-- Request Info Form -->
+    <section class="section" id="request-info">
+        <div class="container">
+            <p class="section-label">Stay in touch</p>
+            <h2>Request More Information</h2>
+            <p style="max-width:640px;margin-bottom:32px;color:var(--paper-dim)">Interested in piloting or want to learn more? Leave your details and we'll follow up with updates, onboarding support, and early access information.</p>
+            <div style="max-width:600px">
+                <form id="pilot-form" action="https://formspree.io/f/xxxxxx" method="POST">
+                    <div style="margin-bottom:16px">
+                        <label style="display:block;font-family:var(--mono);font-size:.72rem;color:var(--ash);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Full name</label>
+                        <input type="text" name="name" placeholder="Your name" required style="width:100%;background:transparent;border:1px solid var(--line);padding:12px 14px;color:var(--paper);font-family:var(--sans);font-size:15px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--line-strong)'" onblur="this.style.borderColor=''">
+                    </div>
+                    <div style="margin-bottom:16px">
+                        <label style="display:block;font-family:var(--mono);font-size:.72rem;color:var(--ash);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Email address</label>
+                        <input type="email" name="email" placeholder="you@school.edu" required style="width:100%;background:transparent;border:1px solid var(--line);padding:12px 14px;color:var(--paper);font-family:var(--sans);font-size:15px;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='var(--line-strong)'" onblur="this.style.borderColor=''">
+                    </div>
+                    <div style="margin-bottom:16px">
+                        <label style="display:block;font-family:var(--mono);font-size:.72rem;color:var(--ash);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Your role</label>
+                        <select name="role" style="width:100%;background:transparent;border:1px solid var(--line);padding:12px 14px;color:var(--paper);font-family:var(--sans);font-size:15px;outline:none;transition:border-color .2s">
+                            <option value="" selected disabled style="background:var(--black);color:var(--paper)">Select your role</option>
+                            <option value="teacher" style="background:var(--black);color:var(--paper)">Teacher / Facilitator</option>
+                            <option value="principal" style="background:var(--black);color:var(--paper)">Principal / Administrator</option>
+                            <option value="homeschool" style="background:var(--black);color:var(--paper)">Homeschool Parent</option>
+                            <option value="microschool" style="background:var(--black);color:var(--paper)">Microschool / Co-op Leader</option>
+                            <option value="district" style="background:var(--black);color:var(--paper)">District Administrator</option>
+                            <option value="other" style="background:var(--black);color:var(--paper)">Other</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:16px">
+                        <label style="display:block;font-family:var(--mono);font-size:.72rem;color:var(--ash);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Educational setting</label>
+                        <select name="setting" style="width:100%;background:transparent;border:1px solid var(--line);padding:12px 14px;color:var(--paper);font-family:var(--sans);font-size:15px;outline:none;transition:border-color .2s">
+                            <option value="" selected disabled style="background:var(--black);color:var(--paper)">Select your setting</option>
+                            <option value="public_school" style="background:var(--black);color:var(--paper)">Public School</option>
+                            <option value="private_school" style="background:var(--black);color:var(--paper)">Private School</option>
+                            <option value="microschool" style="background:var(--black);color:var(--paper)">Microschool / Co-op</option>
+                            <option value="homeschool" style="background:var(--black);color:var(--paper)">Homeschool / ESA</option>
+                            <option value="summer_camp" style="background:var(--black);color:var(--paper)">Summer Camp</option>
+                            <option value="after_school" style="background:var(--black);color:var(--paper)">After School / Library Program</option>
+                            <option value="other" style="background:var(--black);color:var(--paper)">Other</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:16px">
+                        <label style="display:block;font-family:var(--mono);font-size:.72rem;color:var(--ash);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px">Questions or comments</label>
+                        <textarea name="message" placeholder="What would you like to know about the pilot?" style="width:100%;background:transparent;border:1px solid var(--line);padding:12px 14px;color:var(--paper);font-family:var(--sans);font-size:15px;outline:none;min-height:100px;resize:vertical;transition:border-color .2s"></textarea>
+                    </div>
+                    <div style="margin-bottom:16px">
+                        <button type="submit" class="btn-primary" style="width:100%;justify-content:center">Send request →</button>
+                    </div>
+                </form>
+                <div id="form-success" style="display:none;border:1px solid var(--line-strong);padding:36px;text-align:center">
+                    <h3 style="margin-bottom:12px">Thank you</h3>
+                    <p style="color:var(--paper-dim);max-width:480px;margin:0 auto">We've received your information and will be in touch with updates about the Florida Pilot Kit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section class="cta-section">
         <div class="container">
@@ -512,7 +569,7 @@
             <p>Access the full Florida Pilot Kit — free during the pilot phase. Download audience-specific packs, preview materials, and start teaching.</p>
             <div class="btn-group-oss" style="justify-content:center">
                 <a href="https://publishing.civicoslabs.com" class="btn-primary" target="_blank" rel="noopener">Access the Pilot Kit →</a>
-                <a href="mailto:info@civicoslabs.com?subject=Florida%20Pilot%20Kit%20Inquiry" class="btn-secondary">Contact Us</a>
+                <a href="#request-info" class="btn-secondary">Request More Info</a>
             </div>
             <p style="margin-top:24px;font-family:var(--mono);font-size:.78rem;color:var(--ash)">
                 publishing.civicoslabs.com &nbsp;·&nbsp; Password: EDU-FL-2026-OSS-PILOT
@@ -529,5 +586,27 @@
     </div>
 </footer>
 
+    <script>
+        (function() {
+            var form = document.getElementById('pilot-form');
+            var success = document.getElementById('form-success');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var data = new FormData(form);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', form.action, true);
+                    xhr.setRequestHeader('Accept', 'application/json');
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            form.style.display = 'none';
+                            success.style.display = 'block';
+                        }
+                    };
+                    xhr.send(data);
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
